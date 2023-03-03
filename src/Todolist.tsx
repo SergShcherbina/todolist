@@ -3,7 +3,7 @@ import {FilterValuesType} from './App';
 import {useAutoAnimate} from "@formkit/auto-animate/react";              //скрипт для авто анимации списка
 import './Todolist.css'
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     isDone: boolean
@@ -12,11 +12,13 @@ type TaskType = {
 type PropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: (taskId: string) => void
-    changeFilter: (value: FilterValuesType) => void
-    addTask: (title: string) => void
-    onChangeStatusChecked: (idChecked: string, isDoneTask: boolean) => void
+    removeTask: (taskId: string, todoListId: string) => void
+    changeFilter: (value: FilterValuesType, todoListId: string) => void
+    addTask: (title: string, todoListId: string) => void
+    onChangeStatusChecked: (taskId: string, newIsDone: boolean, todoListId: string) => void
     filter: string
+    id: string
+    removeTodolist: (todolistId: string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -31,7 +33,7 @@ export function Todolist(props: PropsType) {
             setError('Title is required')
             return;
         } else {
-            props.addTask(title.trim());
+            props.addTask(title.trim(), props.id);
             setTitle("");
         }
     }
@@ -46,17 +48,20 @@ export function Todolist(props: PropsType) {
             addTask();
         }
     }
-    const onChangeStatusHandler = (idChecked: string, isDoneTask: boolean) => {
-        props.onChangeStatusChecked(idChecked, isDoneTask)
+    const onChangeStatusHandler = (taskId: string, newIsDone: boolean) => {
+        console.log(newIsDone)
+        props.onChangeStatusChecked(taskId, newIsDone, props.id)
     }
 
 
-    const onAllClickHandler = () => props.changeFilter("all");
-    const onActiveClickHandler = () => { props.changeFilter("active")};
-    const onCompletedClickHandler = () => props.changeFilter("completed");
+    const onAllClickHandler = () => props.changeFilter("all", props.id );
+    const onActiveClickHandler = () => { props.changeFilter("active", props.id)};
+    const onCompletedClickHandler = () => props.changeFilter("completed", props.id);
 
     return <div className={'wrapperTodolist'}>
-        <h3>{props.title}</h3>
+        <h3>{props.title}
+            <button onClick={() => props.removeTodolist(props.id)} >x</button>
+        </h3>
         <div>
             <input value={title}
                    onChange={ onChangeHandler }
@@ -64,7 +69,7 @@ export function Todolist(props: PropsType) {
                    className={error ? "error" : ''}
             />
             <button onClick={addTask}
-                    disabled={ title ? false : true }>+</button>
+                    disabled={ !title  }>+</button>
             { error ? <div className={'error-message'}> {error} </div> : null}
         </div>
 
@@ -72,11 +77,11 @@ export function Todolist(props: PropsType) {
             {
                 props.tasks.map(t => {
 
-                    const onClickHandler = () => props.removeTask(t.id)
+                    const onClickHandler = () => props.removeTask(t.id, props.id)
 
                     return <li key={t.id} className={t.isDone ? "is-done" : 'listTasks'}>
                         <input type="checkbox"
-                               onChange={()=>onChangeStatusHandler(t.id, t.isDone)}
+                               onChange={()=>onChangeStatusHandler(t.id, !t.isDone)}
                                checked={t.isDone}
                         />
                         <span>{t.title}</span>
