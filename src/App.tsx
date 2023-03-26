@@ -77,6 +77,13 @@ function App() {
         }
     }
 
+    const changeTitle = (todolistId: string, taskID: string, newTitle : string)=> {
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map(el => el.id === taskID ? {...el, title: newTitle} : el)})
+    }
+    const onChangeTitleTodolist = (todolistId: string, newTitle : string)=> {
+        setTodolists(todoLists.map(td => td.id === todolistId ? {...td, title: newTitle} : td))
+    }
+
     return (
         <Container fixed >
 
@@ -113,7 +120,7 @@ function App() {
                             tasksForTodolist = tasks[todolist.id].filter(t => t.isDone);
                         }
                         return (
-                            <Grid item>
+                            <Grid item key={todolist.id}>
                                 <Paper style={{padding: "10px"}} >
                                     <Todolist key={todolist.id}
                                     title={todolist.title}
@@ -124,7 +131,9 @@ function App() {
                                     addTask={addTask}
                                     onChangeStatusChecked={onChangeStatusChecked}
                                     removeTodolist={removeTodolist}
-                                    filter={todolist.filter} />
+                                    filter={todolist.filter}
+                                    onChangeTitleTodolist={onChangeTitleTodolist}
+                                    changeTitle={changeTitle} />
                                 </Paper>
                             </Grid>                            
                         )
