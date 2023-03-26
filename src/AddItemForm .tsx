@@ -1,3 +1,4 @@
+import { Button, TextField } from "@mui/material"
 import { ChangeEvent, KeyboardEvent, useState } from "react"
 
 type AddItemFormType = {
@@ -24,21 +25,29 @@ export const AddItemForm = (props: AddItemFormType) => {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.charCode === 13) {                                                    //поведение при нажатии на ввод
+        if (e.charCode === 13) {                                                      //поведение при нажатии на ввод
             addItem();
         }
     }
 
     return (
         <div>
-            <input value={newTitle}
+            <TextField value={newTitle}
                 onChange={ onChangeHandler }
                 onKeyPress={ onKeyPressHandler }
-                className={error ? "error" : ''}
+                // className={error ? "error" : ''}
+                error={!!error}                                                       //обрамление input при ошибке, окрас в красный
+                size="small"
+                id="outlined-error-helper-text"
+                label="Title"                                                         //текст над инпутом
+                helperText={error}                                                    //текст ошибки
             />
-            <button onClick={addItem}
-                    disabled={ !newTitle  }>+</button>
-            { error ? <div className={'error-message'}> {error} </div> : null}
+            <Button onClick={addItem}
+                    disabled={ !newTitle  }
+                    sx={{height: 40 }}
+                    variant='contained' 
+                    >add</Button>
+            {/* { error ? <div className={'error-message'}> {error} </div> : null} */}
         </div>        
     )
 }

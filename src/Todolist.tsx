@@ -3,6 +3,11 @@ import { FilterValuesType } from './App';
 import { useAutoAnimate } from "@formkit/auto-animate/react";              //скрипт для авто анимации списка
 import './Todolist.css'
 import { AddItemForm } from './AddItemForm ';
+import { Button, Checkbox, IconButton, List } from '@mui/material';
+import {Delete} from '@mui/icons-material'
+import {DeleteForever, CancelPresentation} from '@mui/icons-material';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import { pink } from '@mui/material/colors';
 
 export type TaskType = {
     id: string
@@ -30,7 +35,6 @@ export function Todolist(props: PropsType) {
     }
 
     const onChangeStatusHandler = (taskId: string, newIsDone: boolean) => {
-        console.log(newIsDone)
         props.onChangeStatusChecked(taskId, newIsDone, props.id)
     }
 
@@ -39,34 +43,34 @@ export function Todolist(props: PropsType) {
 
     return <div className={'wrapperTodolist'}>
         <h3>{props.title}
-            <button onClick={() => props.removeTodolist(props.id)} >x</button>
+            <Button onClick={() => props.removeTodolist(props.id)}  ><DeleteSweepIcon fontSize={"medium"} sx={{ color: pink[500] }}/></Button>
         </h3>
         <AddItemForm addItem={addTask} />
 
-        <ul ref={refLi}>
+        <List ref={refLi}>
             {
                 props.tasks.map(t => {
 
                     const onClickHandler = () => props.removeTask(t.id, props.id)
 
                     return <li key={t.id} className={t.isDone ? "is-done" : 'listTasks'}>
-                        <input type="checkbox"
+                        <Checkbox
                             onChange={() => onChangeStatusHandler(t.id, !t.isDone)}
                             checked={t.isDone}
                         />
                         <span>{t.title}</span>
-                        <button onClick={onClickHandler}>x</button>
+                        <IconButton  size={'small'} onClick={onClickHandler}>< DeleteForever /></IconButton >                        
                     </li>
                 })
             }
-        </ul>
+        </List>
         <div>
-            <button className={props.filter === 'all' ? 'active-filter' : 'filter'}
-                onClick={onFilterClickHandler("all")}>All</button>
-            <button className={props.filter === 'active' ? 'active-filter' : 'filter'}
-                onClick={onFilterClickHandler("active")}>Active</button>
-            <button className={props.filter === 'completed' ? 'active-filter' : 'filter'}
-                onClick={onFilterClickHandler("completed")}>Completed</button>
+            <Button variant={"outlined"}  size="small" color={props.filter === 'all' ? 'secondary' : 'primary'}
+                onClick={onFilterClickHandler("all")}>All</Button>
+            <Button variant={"outlined"} size="small" color={props.filter === 'active' ? 'secondary' : 'primary'}
+                onClick={onFilterClickHandler("active")}>Active</Button>
+            <Button variant={"outlined"} size="small" color={props.filter === 'completed' ? 'secondary' : 'primary'}
+                onClick={onFilterClickHandler("completed")}>Completed</Button>
         </div>
     </div>
 }
