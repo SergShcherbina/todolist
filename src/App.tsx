@@ -9,12 +9,12 @@ import { Container } from '@mui/system';
 
 export type FilterValuesType = "all" | "active" | "completed";
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: FilterValuesType
 };
-type TasksStateType = {
+export type TasksStateType = {
     [key: string]: Array<TaskType>                                      //типизация "ассоциативного массива"
 }
 
@@ -58,6 +58,10 @@ function App() {
         })
     }
 
+    const changeTitleTask = (todolistId: string, taskID: string, newTitle : string)=> {
+        setTasks({...tasks, [todolistId]: tasks[todolistId].map(el => el.id === taskID ? {...el, title: newTitle} : el)})
+    }
+
     const addTodolist = (value: string) => {
         const newTodolistId = v1();
         const newTodolist: TodoListType = { id: newTodolistId, title: value, filter: 'all' }
@@ -77,9 +81,6 @@ function App() {
         }
     }
 
-    const changeTitle = (todolistId: string, taskID: string, newTitle : string)=> {
-        setTasks({...tasks, [todolistId]: tasks[todolistId].map(el => el.id === taskID ? {...el, title: newTitle} : el)})
-    }
     const onChangeTitleTodolist = (todolistId: string, newTitle : string)=> {
         setTodolists(todoLists.map(td => td.id === todolistId ? {...td, title: newTitle} : td))
     }
@@ -133,7 +134,7 @@ function App() {
                                     removeTodolist={removeTodolist}
                                     filter={todolist.filter}
                                     onChangeTitleTodolist={onChangeTitleTodolist}
-                                    changeTitle={changeTitle} />
+                                    changeTitle={changeTitleTask} />
                                 </Paper>
                             </Grid>                            
                         )
