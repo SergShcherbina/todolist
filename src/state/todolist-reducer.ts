@@ -7,7 +7,7 @@ export type ActionsType =
     ChangeTodolistTitleAT |
     ChangeTodolistFilterAT
 
-//[key: string] : any                                           //заглушка на любой случай в action
+//[key: string] : any                              //заглушка на любой случай в action
 
 export type AddTodolistAT = {
     type: 'ADD-TODOLIST'
@@ -28,8 +28,7 @@ export type ChangeTodolistFilterAT = {
     filter: string
 }
 
-
-//reduser функция которая меняет стор и стейт иммутабельно
+//reduser функция, которая меняет стор и стейт иммутабельно
 export const todolistsReducer = (state: Array<TodoListType>, action: ActionsType) => {
     switch (action.type) {
         case 'ADD-TODOLIST':
@@ -47,7 +46,7 @@ export const todolistsReducer = (state: Array<TodoListType>, action: ActionsType
     }
 }
 
-//actinCreater создает action на основе вх данных(тип звдаем тут,остальное принимаем)
+//actinCreater создает action на основе вх данных(тип задаем тут остальное принимаем)
 export const RemoveTodolistAC = (todolistId: string): RemoveTodolistAT => {
     return {type: 'REMOVE_TODOLIST', id: todolistId}
 }
