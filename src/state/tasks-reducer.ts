@@ -1,4 +1,4 @@
-import {TasksStateType} from "../App";
+import {TasksStateType, TodoListType} from "../App";
 import {v1} from "uuid";
 import {AddTodolistAT, RemoveTodolistAC, RemoveTodolistAT} from "./todolist-reducer";
 
@@ -24,7 +24,9 @@ type ActionType =
     | AddTodolistAT                              // импортированный AC
     | RemoveTodolistAT;                          // импортированный AC
 
-export const tasksReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
+const initialState: TasksStateType = {}
+
+export const tasksReducer = (state: TasksStateType = initialState, action: ActionType): TasksStateType => {
     switch(action.type) {
         case 'ADD-TASK':
             const newTasks = { id: v1(), title: action.title, isDone: false };
@@ -41,7 +43,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
 
         //прогоняем чужой Action для этого reducer
         case 'ADD-TODOLIST':
-            return {...state, [action.title] : []}
+            return {...state, [action.newTodolistId] : []}
         case 'REMOVE_TODOLIST':
             // return { [action.id] : [] , ...rest} = {...state}   удаление с помощью деструктуризации
             const copyState = {...state}
