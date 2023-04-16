@@ -1,152 +1,148 @@
 import React, {useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
-import {v1} from "uuid";
-import {AddItemForm} from './AddItemForm ';
-import {AppBar, Button, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import {Container} from '@mui/system';
+import {v1} from 'uuid';
+import {AddItemForm} from './AddItemForm';
+
 import {
-    AddTodolistAC,
-    ChangeTodolistFilterAC,
-    ChangeTodolistTitleAC,
-    RemoveTodolistAC,
+    addTodolistAC,
+    changeTodolistFilterAC,
+    changeTodolistTitleAC,
+    removeTodolistAC,
     todolistsReducer
-} from "./state/todolist-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTasksAC, tasksReducer} from "./state/tasks-reducer";
+} from './state/todolists-reducer';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasks-reducer';
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {Menu} from "@mui/icons-material";
 
 export type FilterValuesType = "all" | "active" | "completed";
-
-export type TodoListType = {
+export type TodolistType = {
     id: string
     title: string
     filter: FilterValuesType
-};
+}
+
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-export function AppWithReducers() {
-    let todolistID1 = v1()
-    let todolistID2 = v1()
 
-    const [todoLists, dispatchToTodo] = useReducer ( todolistsReducer, [
-            {id: todolistID1, title: 'What to learn', filter: 'all'},
-            {id: todolistID2, title: 'What to buy', filter: 'all'},
-        ]
-    );
-    const [tasks, dispatchToTasks] = useReducer (tasksReducer, {
-        [todolistID1]: [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
-            {id: v1(), title: 'JS', isDone: true},
-            {id: v1(), title: 'ReactJS', isDone: false},
+function AppWithReducers() {
+    let todolistId1 = v1();
+    let todolistId2 = v1();
+
+    let [todolists, dispatchToTodolists] = useReducer(todolistsReducer, [
+        {id: todolistId1, title: "What to learn", filter: "all"},
+        {id: todolistId2, title: "What to buy", filter: "all"}
+    ])
+
+    let [tasks, dispatchToTasks] = useReducer(tasksReducer, {
+        [todolistId1]: [
+            {id: v1(), title: "HTML&CSS", isDone: true},
+            {id: v1(), title: "JS", isDone: true}
         ],
-        [todolistID2]: [
-            {id: v1(), title: 'Rest API', isDone: true},
-            {id: v1(), title: 'GraphQL', isDone: false},
+        [todolistId2]: [
+            {id: v1(), title: "Milk", isDone: true},
+            {id: v1(), title: "React Book", isDone: true}
         ]
-    })
+    });
 
-    function removeTask(id: string, todoListId: string) {
-        //диспатчим результат вызова э-крейтера в соответствуюший редюсер
-        dispatchToTasks(removeTasksAC(todoListId, id))
+    function removeTask(id: string, todolistId: string) {
+        const action = removeTaskAC(id, todolistId);
+        dispatchToTasks(action);
     }
 
-    function addTask(title: string, todoListId: string) {
-        dispatchToTasks(addTaskAC(title, todoListId))
+    function addTask(title: string, todolistId: string) {
+        const action = addTaskAC(title, todolistId);
+        dispatchToTasks(action);
     }
 
-    const onChangeStatusChecked = (taskId: string, newIsDone: boolean, todoListId: string) => {
-        dispatchToTasks(changeTaskStatusAC(todoListId, taskId, newIsDone))
+    function changeStatus(id: string, isDone: boolean, todolistId: string) {
+        const action = changeTaskStatusAC(id, isDone, todolistId);
+        dispatchToTasks(action);
     }
 
-    const changeTitleTask = (todoListId: string, taskId: string, newTitle: string) => {
-        dispatchToTasks(changeTaskTitleAC(todoListId, taskId, newTitle))
+    function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
+        const action = changeTaskTitleAC(id, newTitle, todolistId);
+        dispatchToTasks(action);
     }
 
-    const addTodolist = (value: string) => {
-        //формируем общий action в котором единый id
-        const action = AddTodolistAC(value)
-        dispatchToTodo(action)
-        dispatchToTasks(action)
+    function changeFilter(value: FilterValuesType, todolistId: string) {
+        const action = changeTodolistFilterAC(todolistId, value);
+        dispatchToTodolists(action);
     }
 
-    const removeTodolist = (todoListId: string) => {
-        dispatchToTodo(RemoveTodolistAC(todoListId))
+    function removeTodolist(id: string) {
+        const action = removeTodolistAC(id);
+        dispatchToTasks(action);
+        dispatchToTodolists(action);
     }
 
-    function changeFilter(value: FilterValuesType, todoListId: string) {
-        dispatchToTodo(ChangeTodolistFilterAC(todoListId, value))
+    function changeTodolistTitle(id: string, title: string) {
+        const action = changeTodolistTitleAC(id, title);
+        dispatchToTodolists(action);
     }
 
-    const onChangeTitleTodolist = (todoListId: string, newTitle: string) => {
-        dispatchToTodo(ChangeTodolistTitleAC(todoListId, newTitle))
+    function addTodolist(title: string) {
+        const action = addTodolistAC(title);
+        dispatchToTasks(action);
+        dispatchToTodolists(action);
     }
 
     return (
-        <Container fixed>
-
+        <div className="App">
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 2}}
-                    >
-                        <MenuIcon/>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                    <Typography variant="h6">
                         News
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
+            <Container fixed>
+                <Grid container style={{padding: "20px"}}>
+                    <AddItemForm addItem={addTodolist}/>
+                </Grid>
+                <Grid container spacing={3}>
+                    {
+                        todolists.map(tl => {
+                            let allTodolistTasks = tasks[tl.id];
+                            let tasksForTodolist = allTodolistTasks;
 
-            <Grid container padding={{padding: "20px 0"}}>
-                <AddItemForm addItem={addTodolist}/>
-            </Grid>
-            <Grid container spacing={3}>
-                {
-                    todoLists.map(todolist => {
-                            let tasksForTodolist = tasks[todolist.id];
+                            if (tl.filter === "active") {
+                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false);
+                            }
+                            if (tl.filter === "completed") {
+                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true);
+                            }
 
-                            if (todolist.filter === "active") {
-                                tasksForTodolist = tasks[todolist.id].filter(t => !t.isDone);
-                            }
-                            if (todolist.filter === "completed") {
-                                tasksForTodolist = tasks[todolist.id].filter(t => t.isDone);
-                            }
-                            return (
-                                <Grid item key={todolist.id}>
-                                    <Paper style={{padding: "10px"}}>
-                                        <Todolist key={todolist.id}
-                                                  title={todolist.title}
-                                                  id={todolist.id}
-                                                  tasks={tasksForTodolist}
-                                                  removeTask={removeTask}
-                                                  changeFilter={changeFilter}
-                                                  addTask={addTask}
-                                                  onChangeStatusChecked={onChangeStatusChecked}
-                                                  removeTodolist={removeTodolist}
-                                                  filter={todolist.filter}
-                                                  onChangeTitleTodolist={onChangeTitleTodolist}
-                                                  changeTitle={changeTitleTask}/>
-                                    </Paper>
-                                </Grid>
-                            )
-                        }
-                    )
-                }
-            </Grid>
-        </Container>
+                            return <Grid key={tl.id} item>
+                                <Paper style={{padding: "10px"}}>
+                                    <Todolist
+                                        key={tl.id}
+                                        id={tl.id}
+                                        title={tl.title}
+                                        tasks={tasksForTodolist}
+                                        removeTask={removeTask}
+                                        changeFilter={changeFilter}
+                                        addTask={addTask}
+                                        changeTaskStatus={changeStatus}
+                                        filter={tl.filter}
+                                        removeTodolist={removeTodolist}
+                                        changeTaskTitle={changeTaskTitle}
+                                        changeTodolistTitle={changeTodolistTitle}
+                                    />
+                                </Paper>
+                            </Grid>
+                        })
+                    }
+                </Grid>
+            </Container>
+        </div>
     );
 }
 
-
-// Container - общий контейнер
-// Grid (container / item) - грид с типом контейнер или item
-// св-во spacing - это отступ
-// Paper - обрамление блока кода 
-// Typography - заголовки
+export default AppWithReducers;

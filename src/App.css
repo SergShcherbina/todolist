@@ -1,24 +1,26 @@
-
-.inputApp {
-  padding: 30px 0 0 30px;
-}
-.wrapperApp {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+/*
+.App {
   padding: 30px;
   display: flex;
 }
 
-/*.error {*/
-/*  border: red 1px solid;*/
-/*}*/
+.App > div {
+  margin-right: 50px;
+}
 
-/*.error-message {*/
-/*  color: red;*/
-/*}*/
+.error {
+  border: red 1px solid;
+}
 
-/*.active-filter {*/
-/*  background-color: aquamarine;*/
-/*}*/
+.error-message {
+  color: red;
+}
 
+.active-filter {
+  background-color: aquamarine;
+}
+
+.is-done {
+  opacity: 0.5;
+}
+*/
