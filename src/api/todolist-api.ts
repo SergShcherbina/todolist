@@ -1,7 +1,4 @@
-import axios from 'axios'
-import {GetTodolists} from "../stories/todolists-api.stories";
-import {number, string} from "prop-types";
-
+import axios, {AxiosResponse} from 'axios'
 
 //общие параметры выносим в instance
 const instance = axios.create({
@@ -13,52 +10,97 @@ const instance = axios.create({
     }
 })
 
+
+export const todolistAPI = {
+    getTodolists() {
+        //методы вызываем у instance и обязательно return данных
+        return instance.get<TodolistApiType[]>('todo-lists')
+    },
+    createTodolist(title: string) {
+        //полезную нагрузку передаем вторым параметром в виде {} св-ва 'title' - имя в зависимости от сервера
+        return instance.post<ResponseType<{ item: TodolistApiType }>, AxiosResponse<ResponseType<{ item: TodolistApiType }>>, { title: string }>('todo-lists', {title})
+    },
+    deleteTodolist(todolistId: string) {
+        return instance.delete <ResponseType<{}>>(`/todo-lists/${todolistId}`)
+    },
+    updateTodolist(todolistId: string, title: string) {
+        const promise = instance.put<ResponseType<{}>>(`todo-lists/${todolistId}`, {title: title})
+            .then(res => {
+                return res.data
+            })
+        console.log(promise)
+        return promise
+    },
+}
+
+export const taskApi = {
+    getTasks(todolistId: string) {
+        return instance.get(`/todo-lists/${todolistId}/tasks`)
+    },
+    addTask(todolistId: string, title: string) {
+        return instance.post(`/todo-lists/${todolistId}/tasks`, {title})
+    },
+    delTask(todolistId: string, taskId: string) {
+        return instance.delete(`/todo-lists/${todolistId}/tasks/${taskId}`)
+    },
+    updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
+        return instance.put(`/todo-lists/${todolistId}/tasks/${taskId}`, model)
+    },
+}
+
 //необычная типизация похожих типов
-export type ResponseTodolistType<D> = {
+export type ResponseType<D> = {
     fieldsErrors: Array<string>
     messages: Array<string>
     resultCode: number
     data: D
 }
-type TodolistApiType = {
+export type TodolistApiType = {
     addedDate: string,
     id: string,
     order: number,
     title: string,
 }
 
-export const todolistAPI = {
-    getTodolists() {
-        //методы вызываем у instance и обязательно return данных
-        return instance.get<Array<TodolistApiType>>('todo-lists')
-    },
-    createTodolist(title: string) {
-        //полезную нагрузку передаем вторым параметром в виде {} св-ва 'title' в зависимости от сервера
-        return instance.post<ResponseTodolistType<{D: TodolistApiType}>>('todo-lists', {title})
-    },
-    deleteTodolist(todolistId: string) {
-        return instance.delete<ResponseTodolistType<{}>>(`/todo-lists/${todolistId}`)
-    },
-    updateTodolist(todolistId: string, title: string) {
-        const promise = instance.put<ResponseTodolistType<{}>>(`todo-lists/${todolistId}`, {title: title})
-            .then(res => {
-                return res.data
-        })
-        return promise
-    },
+
+export enum TaskStatuses {
+    New = 0,
+    InProgress = 1,
+    Completed = 2,
+    Draft = 3
 }
 
-export const taskApi = {
-    getTasks(todolistId : string ){
-        return instance.get(`/todo-lists/${todolistId}/tasks`)
-    },
-    addTask(todolistId: string, title: string){
-        return instance.post(`/todo-lists/${todolistId}/tasks`, {title})
-    },
-    delTask(todolistId: string, taskId: string){
-        return instance.delete(`/todo-lists/${todolistId}/tasks/${taskId}`)
-    },
-    updateTask(todolistId: string, taskId: string, title: string){
-        return instance.put(`/todo-lists/${todolistId}/tasks/${taskId}`, {title})
-    }
+export enum TaskPriorities {
+    Low = 0,
+    Middle = 1,
+    Hi = 2,
+    Urgently = 3,
+    Later = 4
 }
+
+export type TaskType = {
+    description: string
+    title: string
+    status: TaskStatuses
+    priority: TaskPriorities
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
+}
+export type UpdateTaskModelType = {
+    title: string
+    description: string
+    status: TaskStatuses
+    priority: TaskPriorities
+    startDate: string
+    deadline: string
+}
+type GetTasksResponse = {
+    error: string | null
+    totalCount: number
+    items: TaskType[]
+}
+

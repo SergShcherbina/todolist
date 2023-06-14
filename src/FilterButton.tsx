@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button} from "@mui/material";
-import {FilterValuesType} from "./App";
+import {FilterValuesType} from "./AppWithRedux";
 
 type PropsButtonFilterType = {
     variant: 'outlined' | 'text',
