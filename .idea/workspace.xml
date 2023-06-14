@@ -5,48 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ec7eb3c-c10b-49bc-948e-6260e57ec81a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/state/.tasks-reducer.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/.App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppWithReducers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/.AppWithReducers.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppWithRedux.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppWithRedux.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EditableSpan.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/EditableSpan.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FilterButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/FilterButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Todolist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Todolist.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/todolist-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/todolist-api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/tasks-reducer.test.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state/tasks-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/tasks-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/todolists-reducer.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/todolists-reducer.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state/todolists-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/todolists-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/todolists-tasks-reducer.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/todolists-tasks-reducer.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/task-api.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/stories/.task-api.stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stories/todolists-api.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/stories/.todolists-api.stories.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/AddItemForm .tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/AppWithReducers.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/AppWithRedux.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/EditableSpan.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/Todolist.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/Todolist.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/react-app-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/serviceWorker.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/setupTests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/state/store.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/state/tasks-reducer.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/state/tasks-reducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/state/todolist-reducer.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/state/todolist-reducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/state/user-reducer.test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src10/state/user-reducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +189,7 @@
       <workItem from="1686242628016" duration="35439000" />
       <workItem from="1686657952726" duration="618000" />
       <workItem from="1686669970945" duration="5252000" />
-      <workItem from="1686682013835" duration="23328000" />
+      <workItem from="1686682013835" duration="27246000" />
     </task>
     <servers />
   </component>

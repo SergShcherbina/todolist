@@ -151,28 +151,6 @@ export const addTaskTC = (todolistId: string, title: string) => {
     }
 }
 
-// export const changeTaskStatusTC = (taskId: string, todolistId: string, status: TaskStatuses,) => {
-//     //типизация getState : () => AppRootStateType
-//     return (dispatch: Dispatch, getState : () => AppRootStateType) => {
-//         const task = getState().tasks[todolistId].find(t => t.id === taskId)
-//
-//         if(task) {
-//             const model: UpdateTaskModelType = {
-//                 title: task.title,
-//                 startDate: task.startDate,
-//                 description: task.description,
-//                 priority: task.priority,
-//                 deadline: task.deadline,
-//                 status,
-//             }
-//             taskApi.updateTask(todolistId, taskId, model)
-//                 .then(res => {
-//                     dispatch(changeTaskStatusAC(taskId, status , todolistId))
-//                 })
-//         }
-//     }
-// }
-
 /////////////////////общая санка для смены status & title с типизацией /////////////
 type FlexType = {
     title?: string
