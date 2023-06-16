@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useReducer, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
 import {AddItemForm} from './AddItemForm';
@@ -6,8 +6,7 @@ import {AddItemForm} from './AddItemForm';
 import {
     addTodolistTC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistTC, setTodolistTС, updateTodolistTC,
+    removeTodolistTC, setTodolistTC, TodolistType, updateTodolistTC,
 } from './state/todolists-reducer';
 import {
     addTaskTC,
@@ -16,29 +15,33 @@ import {
 } from './state/tasks-reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatchType, AppRootStateType} from './state/store';
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
-import {Menu} from "@mui/icons-material";
 import {TaskStatuses, TaskType} from "./api/todolist-api";
+//импортируем только нужны компоненты, а не всю библиотеку
+import AppBar from "@mui/material/AppBar"
+import Container from "@mui/material/Container"
+import IconButton from "@mui/material/IconButton"
+import Paper from "@mui/material/Paper"
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/icons-material/Menu";
+import LinearProgress from "@mui/material/LinearProgress";
+import {ErrorSnackbars} from "./Components/ErrorSnackbar/ErrorSnackbar";
 
 export type FilterValuesType = "all" | "active" | "completed";
-export type TodolistType = {
-    id: string
-    title: string
-    filter: FilterValuesType
-}
-
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-
 function AppWithRedux() {
     const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-    const dispatch = useDispatch<AppDispatchType>();                    //типизируем для thunk
+    const status = useSelector<AppRootStateType, string >(state => state.app.status)
+    const dispatch = useDispatch<AppDispatchType>();                                //типизируем для thunk
 
     useEffect(() => {
-        dispatch(setTodolistTС())
+        dispatch(setTodolistTC())
     }, [])
 
     const removeTask = useCallback((id: string, todolistId: string) => {
@@ -87,6 +90,8 @@ function AppWithRedux() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
+                {/*добавляем линию прогресса из @mui материалUI, добавляем условный рендериг */}
+                {status === 'loading' && <LinearProgress color="secondary"/>}
             </AppBar>
             <Container fixed>
                 <Grid container style={{padding: "20px"}}>
@@ -109,6 +114,7 @@ function AppWithRedux() {
                                         removeTodolist={removeTodolist}
                                         changeTaskTitle={changeTaskTitle}
                                         changeTodolistTitle={changeTodolistTitle}
+                                        entityStatus={tl.entityStatus}
                                     />
                                 </Paper>
                             </Grid>
@@ -116,6 +122,8 @@ function AppWithRedux() {
                     }
                 </Grid>
             </Container>
+            {/*компонента алерт ошибки из материалUI*/}
+            <ErrorSnackbars/>
         </div>
     );
 }

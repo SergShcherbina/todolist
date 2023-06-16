@@ -10,11 +10,10 @@ const instance = axios.create({
     }
 })
 
-
 export const todolistAPI = {
     getTodolists() {
         //методы вызываем у instance и обязательно return данных
-        return instance.get<TodolistApiType[]>('todo-lists')
+        return instance.get('todo-lists')
     },
     createTodolist(title: string) {
         //полезную нагрузку передаем вторым параметром в виде {} св-ва 'title' - имя в зависимости от сервера
@@ -24,12 +23,8 @@ export const todolistAPI = {
         return instance.delete <ResponseType<{}>>(`/todo-lists/${todolistId}`)
     },
     updateTodolist(todolistId: string, title: string) {
-        const promise = instance.put<ResponseType<{}>>(`todo-lists/${todolistId}`, {title: title})
-            .then(res => {
-                return res.data
-            })
-        console.log(promise)
-        return promise
+        return  instance.put<ResponseType<{}>>(`todo-lists/${todolistId}`, {title: title})
+
     },
 }
 
@@ -61,7 +56,11 @@ export type TodolistApiType = {
     order: number,
     title: string,
 }
-
+export enum ResultCode {
+    COMPLETED = 0,
+    ERROR = 1,
+    CAPTCHA= 10
+}
 export enum TaskStatuses {
     New = 0,
     InProgress = 1,
@@ -86,6 +85,7 @@ export type TaskType = {
     todoListId: string
     order: number
     addedDate: string
+    entityTaskStatus?: boolean
 }
 export type UpdateTaskModelType = {
     title: string

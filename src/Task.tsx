@@ -12,10 +12,12 @@ export type  TaskPropsType = {
     removeTask: (taskId: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
     changeTaskTitle: (taskId: string, newValue: string, todolistId: string) => void
+    entityTaskStatus?: boolean
 }
 
 export const TaskRedux = memo((props: TaskPropsType) => {
     const dispatch = useDispatch<AppDispatchType>();
+    // const isDisabled = useSelector<AppRootStateType, boolean>(state => state.app.isDisabled)
 
     const onClickHandlerRemove = useCallback(() => {
         props.removeTask(props.task.id, props.todolistId)
@@ -35,10 +37,14 @@ export const TaskRedux = memo((props: TaskPropsType) => {
             checked={props.task.status === TaskStatuses.Completed}
             color="primary"
             onChange={onChangeTaskStatus}
+            disabled={props.entityTaskStatus}
         />
 
-        <EditableSpan value={props.task.title} onChange={onTitleChangeHandler}/>
-        <IconButton onClick={onClickHandlerRemove}>
+        <EditableSpan value={props.task.title} onChange={onTitleChangeHandler} disabled={props.entityTaskStatus}/>
+        <IconButton
+            onClick={onClickHandlerRemove}
+            disabled={props.entityTaskStatus}
+        >
             <Delete/>
         </IconButton>
     </div>
