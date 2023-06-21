@@ -3,7 +3,7 @@ import {appSetErrorAC, appSetLoadingStatusAC} from "../app/app-reducer";
 import {Dispatch} from "redux";
 import {AxiosResponse} from "axios";
 
-//джинериковая функция (динамическая типизация)
+//джeнериковая функция (динамическая типизация)
 export const handleServerAppError = <T>(res: AxiosResponse<ResponseType<T>>, dispatch: Dispatch, ) => {
     if((res.data.messages.length >= 1)){
         dispatch(appSetErrorAC(res.data.messages[0] + '😠'))

@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from 'axios'
+import {logOutTC} from "../login/authReducer";
 
 //общие параметры выносим в instance
 const instance = axios.create({
@@ -13,7 +14,7 @@ const instance = axios.create({
 export const todolistAPI = {
     getTodolists() {
         //методы вызываем у instance и обязательно return данных
-        return instance.get('todo-lists')
+        return instance.get<TodolistApiType[]>('todo-lists')
     },
     createTodolist(title: string) {
         //полезную нагрузку передаем вторым параметром в виде {} св-ва 'title' - имя в зависимости от сервера
@@ -41,6 +42,18 @@ export const taskApi = {
     updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
         return instance.put<ResponseType<TaskType>>(`/todo-lists/${todolistId}/tasks/${taskId}`, model)
     },
+}
+
+export const loginAPI = {
+    login(data: LoginParamsType){                                                   //логинимся
+        return instance.post<ResponseType<number>, AxiosResponse<ResponseType<number>>, LoginParamsType>('auth/login', data)
+    },
+    me(){                                                                           //проверяем или залогинены
+        return instance.get<ResponseType<ResponseMeType>>('auth/me')
+    },
+    logOut(){                                                                       //вылогиниваемся
+        return instance.delete<ResponseType<{}>>('/auth/login')
+    }
 }
 
 //необычная типизация похожих типов
@@ -100,4 +113,14 @@ type GetTasksResponse = {
     totalCount: number
     items: TaskType[]
 }
-
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: boolean
+}
+export type ResponseMeType = {
+    id: number,
+    email: string,
+    login: string
+}

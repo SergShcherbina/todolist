@@ -9,9 +9,9 @@ import {TaskStatuses, TaskType} from "./api/todolist-api";
 export type  TaskPropsType = {
     task: TaskType
     todolistId: string
-    removeTask: (taskId: string, todolistId: string) => void
+    removeTask: (taskId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
-    changeTaskTitle: (taskId: string, newValue: string, todolistId: string) => void
+    changeTaskTitle: (taskId: string, newValue: string) => void
     entityTaskStatus?: boolean
 }
 
@@ -20,8 +20,8 @@ export const TaskRedux = memo((props: TaskPropsType) => {
     // const isDisabled = useSelector<AppRootStateType, boolean>(state => state.app.isDisabled)
 
     const onClickHandlerRemove = useCallback(() => {
-        props.removeTask(props.task.id, props.todolistId)
-    }, [dispatch, props.todolistId])
+        props.removeTask(props.task.id)
+    }, [dispatch])
 
     const onChangeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         let newIsDoneValue = e.currentTarget.checked;
@@ -29,8 +29,8 @@ export const TaskRedux = memo((props: TaskPropsType) => {
     }, [props.task]);
 
     const onTitleChangeHandler = useCallback((newValue: string) => {
-        props.changeTaskTitle(props.task.id, newValue, props.todolistId)
-    }, [dispatch, props.todolistId]);
+        props.changeTaskTitle(props.task.id, newValue)
+    }, [dispatch]);
 
     return <div className={props.task.status ? "is-done" : ""}>
         <Checkbox

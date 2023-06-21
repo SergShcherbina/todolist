@@ -5,8 +5,9 @@ import {
     appSetLoadingStatusAC,
     RequestStatusType
 } from "../app/app-reducer";
-import {FilterValuesType} from "../AppWithRedux";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error.utils";
+import {AxiosError} from "axios";
+import {FilterValuesType} from "../todolistList/Todolist";
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST',
@@ -100,9 +101,11 @@ export const entityStatusAC = (todolistId: string, entityStatus: RequestStatusTy
 
 export const setTodolistTC = () => {
     return (dispatch: Dispatch) => {
+        dispatch(appSetLoadingStatusAC('loading'))
         todolistAPI.getTodolists()
             .then(res => {
                 dispatch(setTodolistAC(res.data))
+                dispatch(appSetLoadingStatusAC('succeeded'))
             })
             .catch((err)=> {
                 handleServerNetworkError(err, dispatch)
@@ -127,7 +130,7 @@ export const removeTodolistTC = (todolistId: string) => {
                     dispatch(appSetLoadingStatusAC('failed'))                   //диспатчим состояние загрузки(убираем спиннер)
                 }
             })
-            .catch((err)=> {                                                          //срабатывает если ошибка с соид-ем инте-та
+            .catch((err: AxiosError<ErrType>)=> {                                     //срабатывает если ошибка с соид-ем инте-та
                 dispatch(appSetErrorAC( err.message + ' 😠'))                   //диспатчим сообщение ошибки
                 dispatch(appSetLoadingStatusAC('failed'))                      //диспатчим состояние загрузки(убираем спиннер)
             })
@@ -171,4 +174,13 @@ export const updateTodolistTC = (todolistId: string, title: string) => {
         })
 
     }
+}
+
+type ErrType = {
+    code: number
+    config: number
+    message: string
+    name: string
+    request: any
+    stack: string
 }
