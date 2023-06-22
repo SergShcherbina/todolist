@@ -1,15 +1,15 @@
 import Grid from "@mui/material/Grid";
-import {AddItemForm} from "../AddItemForm";
+import {AddItemForm} from "../../Components/AddItemForm/AddItemForm";
 import Paper from "@mui/material/Paper";
-import {Todolist} from "./Todolist";
+import {Todolist} from "./Todolist/Todolist";
 import React, {useCallback, useEffect} from "react";
 import {
     addTodolistTC, setTodolistTC,
     TodolistType,
-} from "../state/todolists-reducer";
+} from "./todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppDispatchType, AppRootStateType, useAppSelector} from "../state/store";
-import {TasksStateType} from "../AppWithRedux";
+import {AppDispatchType, AppRootStateType, useAppSelector} from "../../app/store";
+import {TasksStateType} from "../../app/AppWithRedux";
 import {Navigate} from "react-router-dom";
 
 export const TodolistList = () => {

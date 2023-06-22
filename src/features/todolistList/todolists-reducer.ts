@@ -1,13 +1,13 @@
-import { ResultCode, todolistAPI, TodolistApiType} from "../api/todolist-api";
+import { ResultCode, todolistAPI, TodolistApiType} from "../../api/todolist-api";
 import {Dispatch} from "redux";
 import {
     appSetErrorAC,
     appSetLoadingStatusAC,
     RequestStatusType
-} from "../app/app-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../utils/error.utils";
+} from "../../app/app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../../utils/error.utils";
 import {AxiosError} from "axios";
-import {FilterValuesType} from "../todolistList/Todolist";
+import {FilterValuesType} from "./Todolist/Todolist";
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST',

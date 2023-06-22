@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios'
-import {logOutTC} from "../login/authReducer";
+import {logOutTC} from "../features/login/authReducer";
 
 //общие параметры выносим в instance
 const instance = axios.create({

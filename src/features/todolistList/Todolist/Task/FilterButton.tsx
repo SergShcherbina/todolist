@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button} from "@mui/material";
-import {FilterValuesType} from "./todolistList/Todolist";
+import {FilterValuesType} from "../Todolist";
 
 type PropsButtonFilterType = {
     variant: 'outlined' | 'text',
