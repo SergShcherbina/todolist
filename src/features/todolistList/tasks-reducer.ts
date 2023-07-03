@@ -90,15 +90,15 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
       return copyState;
     }
     //пишем кейс для добавления пустого массива тасок в каждый тудулист
-    case "SET-TODOLISTS": {
-      const stateCopy = { ...state };
-      //так как с сервера возвращается массив тудулистов, а осоциативного массива полностью пустой
-      //пробегаем по массиву тудулистов получ-го с сервера и к копии каждого тудулиста[по id] доб пустой массив тасок
-      action.todos.forEach((tl) => {
-        stateCopy[tl.id] = [];
-      });
-      return stateCopy;
-    }
+    // case "SET-TODOLISTS": {
+    //   const stateCopy = { ...state };
+    //   //так как с сервера возвращается массив тудулистов, а осоциативного массива полностью пустой
+    //   //пробегаем по массиву тудулистов получ-го с сервера и к копии каждого тудулиста[по id] доб пустой массив тасок
+    //   action.todos.forEach((tl) => {
+    //     stateCopy[tl.id] = [];
+    //   });
+    //   return stateCopy;
+    // }
     case "SET-TASKS": {
       return { ...state, [action.todolistID]: action.tasks.map((t) => ({ ...t, entityTaskStatus: false })) };
     }

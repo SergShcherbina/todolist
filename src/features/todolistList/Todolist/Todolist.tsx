@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatchType } from "app/store";
 import { TaskStatuses, TaskType } from "api/todolist-api";
 import { RequestStatusType } from "app/app-reducer";
-import { changeTodolistFilterAC, removeTodolistTC, updateTodolistTC } from "../todolists-reducer";
+import { removeTodolistTC, todosActions, updateTodolistTC } from "../todolists-reducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 type PropsType = {
@@ -69,9 +69,8 @@ export const Todolist = memo((props: PropsType) => {
   );
 
   const changeFilter = useCallback(
-    (value: FilterValuesType) => {
-      const action = changeTodolistFilterAC(props.todolistId, value);
-      dispatch(action);
+    (filter: FilterValuesType) => {
+      dispatch(todosActions.changeTodolistFilterAC({ todoId: props.todolistId, filter }));
     },
     [dispatch]
   );

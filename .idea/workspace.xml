@@ -7,10 +7,10 @@
     <list default="true" id="1ec7eb3c-c10b-49bc-948e-6260e57ec81a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/login/authReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/login/authReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/todolistList/Todolist/Todolist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/Todolist/Todolist.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/todolistList/TodolistList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/TodolistList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks-reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/todolistList/todolists-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/todolists-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/error.utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/error.utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +209,10 @@
       <workItem from="1687429956768" duration="3947000" />
       <workItem from="1688246291569" duration="127000" />
       <workItem from="1688386930101" duration="4500000" />
-      <workItem from="1688395481139" duration="7281000" />
+      <workItem from="1688395481139" duration="12633000" />
+      <workItem from="1688421589354" duration="815000" />
+      <workItem from="1688422435150" duration="31000" />
+      <workItem from="1688422505183" duration="652000" />
     </task>
     <servers />
   </component>
