@@ -2,27 +2,24 @@ import { loginAPI, LoginParamsType, ResultCode } from "api/todolist-api";
 import { appActions } from "app/app-reducer";
 import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
 import { AppDispatchType } from "app/store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoggedIn: false,
 };
 
-type InitialStateType = typeof initialState;
-type AuthActionType = LoginAT;
+const slice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    login: (state, action: PayloadAction<boolean>) => {
+      state.isLoggedIn = action.payload;
+    },
+  },
+});
 
-export const authReducer = (state: InitialStateType = initialState, action: AuthActionType) => {
-  switch (action.type) {
-    case "AUTH/LOGIN": {
-      return { ...state, isLoggedIn: action.isLoggedIn };
-    }
-    default: {
-      return state;
-    }
-  }
-};
-type LoginAT = ReturnType<typeof loginAC>;
-
-export const loginAC = (isLoggedIn: boolean) => ({ type: "AUTH/LOGIN", isLoggedIn });
+export const authReducer = slice.reducer;
+export const authActions = slice.actions;
 
 export const loginTC = (data: LoginParamsType) => {
   return (dispatch: AppDispatchType) => {
@@ -31,7 +28,7 @@ export const loginTC = (data: LoginParamsType) => {
       .login(data)
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
-          dispatch(loginAC(true));
+          dispatch(authActions.login(true));
           // dispatch(appActions.appSetLoadingStatus("succeeded"));
           dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
@@ -52,7 +49,7 @@ export const initializeAppTC = () => {
       .me()
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
-          dispatch(loginAC(true));
+          dispatch(authActions.login(true));
           dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           handleServerAppError(res, dispatch);
@@ -73,7 +70,7 @@ export const logOutTC = () => {
       .logOut()
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
-          dispatch(loginAC(false)); //вылогиниваемся
+          dispatch(authActions.login(false)); //вылогиниваемся
           dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           handleServerAppError(res, dispatch);

@@ -5,7 +5,7 @@ import { AxiosResponse } from "axios";
 
 //джeнериковая функция (динамическая типизация)
 export const handleServerAppError = <T>(res: AxiosResponse<ResponseType<T>>, dispatch: Dispatch) => {
-  if (res.data.messages.length >= 1) {
+  if (res.data.messages.length >= ResultCode.ERROR) {
     dispatch(appActions.appSetError(res.data.messages[0] + "😠"));
   } else {
     dispatch(appActions.appSetError("error message + 😠"));

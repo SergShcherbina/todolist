@@ -74,7 +74,16 @@ export const todolistsReducer = (
       return [...state];
     }
     case "ENTITY-STATUS": {
-      return [...state.map((tl) => (tl.id === action.todolistId ? { ...tl, entityStatus: action.entityStatus } : tl))];
+      return [
+        ...state.map((tl) =>
+          tl.id === action.todolistId
+            ? {
+                ...tl,
+                entityStatus: action.entityStatus,
+              }
+            : tl
+        ),
+      ];
     }
     default:
       return state;

@@ -4,8 +4,8 @@ import { AnyAction, combineReducers } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { appReducer } from "./app-reducer";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { authReducer } from "features/login/authReducer";
 import { configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "features/login/authReducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
