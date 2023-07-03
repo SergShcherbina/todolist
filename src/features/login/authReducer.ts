@@ -1,7 +1,7 @@
-import { loginAPI, LoginParamsType, ResultCode } from "../../api/todolist-api";
+import { loginAPI, LoginParamsType, ResultCode } from "api/todolist-api";
 import { Dispatch } from "redux";
-import { appInitializeAC, AppInitializeAT, appSetLoadingStatusAC, AppSetLoadingStatusAT } from "../../app/app-reducer";
-import { handleServerAppError, handleServerNetworkError } from "../../utils/error.utils";
+import { appInitializeAC, AppInitializeAT, appSetLoadingStatusAC, AppSetLoadingStatusAT } from "app/app-reducer";
+import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
 
 const initialState = {
   isLoggedIn: false,

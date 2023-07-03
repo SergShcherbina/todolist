@@ -1,5 +1,5 @@
-import { ResponseType, ResultCode } from "../api/todolist-api";
-import { appSetErrorAC, appSetLoadingStatusAC } from "../app/app-reducer";
+import { ResponseType, ResultCode } from "api/todolist-api";
+import { appSetErrorAC, appSetLoadingStatusAC } from "app/app-reducer";
 import { Dispatch } from "redux";
 import { AxiosResponse } from "axios";
 

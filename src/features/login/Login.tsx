@@ -8,11 +8,11 @@ import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
-import { useAppSelector } from "../../app/store";
+import { useAppSelector } from "app/store";
 import { loginTC } from "./authReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Navigate } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { useAppDispatch } from "hooks/useAppDispatch";
 
 type FormikErrorType = {
   email?: string;

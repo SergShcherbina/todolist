@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { setTodolistTC } from "../features/todolistList/todolists-reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatchType, AppRootStateType, useAppSelector } from "./store";
-import { TaskType } from "../api/todolist-api";
+import { useDispatch } from "react-redux";
+import { AppDispatchType, useAppSelector } from "./store";
+import { TaskType } from "api/todolist-api";
 //импортируем только нужны компоненты, а не всю библиотеку
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -13,11 +12,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/icons-material/Menu";
 import LinearProgress from "@mui/material/LinearProgress";
-import { ErrorSnackbars } from "../Components/ErrorSnackbar/ErrorSnackbar";
-import { TodolistList } from "../features/todolistList/TodolistList";
-import { Login } from "../features/login/Login";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { initializeAppTC, logOutTC } from "../features/login/authReducer";
+import { ErrorSnackbars } from "Components/ErrorSnackbar/ErrorSnackbar";
+import { TodolistList } from "features/todolistList/TodolistList";
+import { Login } from "features/login/Login";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { initializeAppTC, logOutTC } from "features/login/authReducer";
 import { RequestStatusType } from "./app-reducer";
 import { CircularProgress } from "@mui/material";
 
