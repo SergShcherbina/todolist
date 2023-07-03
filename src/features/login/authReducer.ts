@@ -1,14 +1,14 @@
 import { loginAPI, LoginParamsType, ResultCode } from "api/todolist-api";
-import { Dispatch } from "redux";
-import { appInitializeAC, AppInitializeAT, appSetLoadingStatusAC, AppSetLoadingStatusAT } from "app/app-reducer";
+import { appActions } from "app/app-reducer";
 import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
+import { AppDispatchType } from "app/store";
 
 const initialState = {
   isLoggedIn: false,
 };
 
 type InitialStateType = typeof initialState;
-type AuthActionType = LoginAT | AppSetLoadingStatusAT | AppInitializeAT;
+type AuthActionType = LoginAT;
 
 export const authReducer = (state: InitialStateType = initialState, action: AuthActionType) => {
   switch (action.type) {
@@ -25,14 +25,15 @@ type LoginAT = ReturnType<typeof loginAC>;
 export const loginAC = (isLoggedIn: boolean) => ({ type: "AUTH/LOGIN", isLoggedIn });
 
 export const loginTC = (data: LoginParamsType) => {
-  return (dispatch: Dispatch<AuthActionType>) => {
-    dispatch(appSetLoadingStatusAC("loading"));
+  return (dispatch: AppDispatchType) => {
+    dispatch(appActions.appSetLoadingStatus("loading"));
     loginAPI
       .login(data)
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
           dispatch(loginAC(true));
-          dispatch(appSetLoadingStatusAC("succeeded"));
+          // dispatch(appActions.appSetLoadingStatus("succeeded"));
+          dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           handleServerAppError(res, dispatch);
         }
@@ -45,14 +46,14 @@ export const loginTC = (data: LoginParamsType) => {
 
 //эту санку мы отправляем после каждой перезагрузки, чтобы проверить или авторизованны
 export const initializeAppTC = () => {
-  return (dispatch: Dispatch<AuthActionType>) => {
-    dispatch(appSetLoadingStatusAC("loading"));
+  return (dispatch: AppDispatchType) => {
+    dispatch(appActions.appSetLoadingStatus("loading"));
     loginAPI
       .me()
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
           dispatch(loginAC(true));
-          dispatch(appSetLoadingStatusAC("succeeded"));
+          dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           handleServerAppError(res, dispatch);
         }
@@ -61,19 +62,19 @@ export const initializeAppTC = () => {
         handleServerNetworkError(err, dispatch);
       })
       .finally(() => {
-        dispatch(appInitializeAC(true)); //инициализация приложения
+        dispatch(appActions.appInitialize(true)); //инициализация приложения
       });
   };
 };
 export const logOutTC = () => {
-  return (dispatch: Dispatch<AuthActionType>) => {
-    dispatch(appSetLoadingStatusAC("loading"));
+  return (dispatch: AppDispatchType) => {
+    dispatch(appActions.appSetLoadingStatus("loading"));
     loginAPI
       .logOut()
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
           dispatch(loginAC(false)); //вылогиниваемся
-          dispatch(appSetLoadingStatusAC("succeeded"));
+          dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           handleServerAppError(res, dispatch);
         }

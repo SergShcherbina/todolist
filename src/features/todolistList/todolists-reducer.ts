@@ -1,6 +1,6 @@
 import { ResultCode, todolistAPI, TodolistApiType } from "api/todolist-api";
 import { Dispatch } from "redux";
-import { appSetErrorAC, appSetLoadingStatusAC, RequestStatusType } from "app/app-reducer";
+import { appActions, RequestStatusType } from "app/app-reducer";
 import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
 import { AxiosError } from "axios";
 import { FilterValuesType } from "./Todolist/Todolist";
@@ -101,12 +101,12 @@ export const entityStatusAC = (todolistId: string, entityStatus: RequestStatusTy
 
 export const setTodolistTC = () => {
   return (dispatch: Dispatch) => {
-    dispatch(appSetLoadingStatusAC("loading"));
+    dispatch(appActions.appSetLoadingStatus("loading"));
     todolistAPI
       .getTodolists()
       .then((res) => {
         dispatch(setTodolistAC(res.data));
-        dispatch(appSetLoadingStatusAC("succeeded"));
+        dispatch(appActions.appSetLoadingStatus("succeeded"));
       })
       .catch((err) => {
         handleServerNetworkError(err, dispatch);
@@ -115,7 +115,7 @@ export const setTodolistTC = () => {
 };
 export const removeTodolistTC = (todolistId: string) => {
   return (dispatch: Dispatch) => {
-    dispatch(appSetLoadingStatusAC("loading")); //запуск спиннера загрузки
+    dispatch(appActions.appSetLoadingStatus("loading")); //запуск спиннера загрузки
     dispatch(entityStatusAC(todolistId, "loading")); //диспатчим состояние дизейблим кн удаления
     todolistAPI
       .deleteTodolist(todolistId)
@@ -123,22 +123,22 @@ export const removeTodolistTC = (todolistId: string) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
           //если с сервера придет полож код(доки API), enum
           dispatch(removeTodolistAC(todolistId));
-          dispatch(appSetLoadingStatusAC("succeeded"));
+          dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           //в противном случае (ошибка):
           if (res.data.messages.length > 0) {
             //проверяем наличие сообщения ошибки
-            dispatch(appSetErrorAC(res.data.messages[0])); //диспатчим его в компоненту
+            dispatch(appActions.appSetError(res.data.messages[0])); //диспатчим его в компоненту
           } else {
-            dispatch(appSetErrorAC("error + 😠")); //диспатчим свой текст ошибки
+            dispatch(appActions.appSetError("error + 😠")); //диспатчим свой текст ошибки
           }
-          dispatch(appSetLoadingStatusAC("failed")); //диспатчим состояние загрузки(убираем спиннер)
+          dispatch(appActions.appSetLoadingStatus("failed")); //диспатчим состояние загрузки(убираем спиннер)
         }
       })
       .catch((err: AxiosError<ErrType>) => {
         //срабатывает если ошибка с соид-ем инте-та
-        dispatch(appSetErrorAC(err.message + " 😠")); //диспатчим сообщение ошибки
-        dispatch(appSetLoadingStatusAC("failed")); //диспатчим состояние загрузки(убираем спиннер)
+        dispatch(appActions.appSetError(err.message + " 😠")); //диспатчим сообщение ошибки
+        dispatch(appActions.appSetLoadingStatus("failed")); //диспатчим состояние загрузки(убираем спиннер)
       })
       .finally(() => {
         dispatch(entityStatusAC(todolistId, "idle")); //диспатчим состояние раздизейбл кн удаления
@@ -147,13 +147,13 @@ export const removeTodolistTC = (todolistId: string) => {
 };
 export const addTodolistTC = (title: string) => {
   return (dispatch: Dispatch) => {
-    dispatch(appSetLoadingStatusAC("loading"));
+    dispatch(appActions.appSetLoadingStatus("loading"));
     todolistAPI
       .createTodolist(title)
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
           dispatch(addTodolistAC(res.data.data.item));
-          dispatch(appSetLoadingStatusAC("succeeded"));
+          dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           handleServerAppError(res, dispatch); //вынесли кусок кода в дженериковую ф-ю
         }
@@ -165,13 +165,13 @@ export const addTodolistTC = (title: string) => {
 };
 export const updateTodolistTC = (todolistId: string, title: string) => {
   return (dispatch: Dispatch) => {
-    dispatch(appSetLoadingStatusAC("loading"));
+    dispatch(appActions.appSetLoadingStatus("loading"));
     todolistAPI
       .updateTodolist(todolistId, title)
       .then((res) => {
         if (res.data.resultCode === 0) {
           dispatch(changeTodolistTitleAC(todolistId, title));
-          dispatch(appSetLoadingStatusAC("succeeded"));
+          dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           handleServerAppError(res, dispatch);
         }

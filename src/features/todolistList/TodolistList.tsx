@@ -12,7 +12,7 @@ import { Navigate } from "react-router-dom";
 export const TodolistList = () => {
   const todolists = useSelector<AppRootStateType, Array<TodolistType>>((state) => state.todolists);
   const tasks = useAppSelector<TasksStateType>((state) => state.tasks);
-  const isLoggedIn = useAppSelector<boolean>((state) => state.autch.isLoggedIn); //протипизированный хук
+  const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn); //протипизированный хук
   const dispatch = useDispatch<AppDispatchType>();
 
   useEffect(() => {

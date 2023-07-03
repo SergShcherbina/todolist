@@ -27,7 +27,7 @@ export type TasksStateType = {
 function AppWithRedux() {
   const status = useAppSelector<RequestStatusType>((state) => state.app.status);
   const isInitialized = useAppSelector<boolean>((state) => state.app.initialize);
-  const isLoggedIn = useAppSelector<boolean>((state) => state.autch.isLoggedIn);
+  const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch<AppDispatchType>(); //типизируем для thunk
 
   useEffect(() => {

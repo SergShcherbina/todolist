@@ -1,9 +1,9 @@
 import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { appSetErrorAC } from "app/app-reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { AppRootStateType } from "app/store";
+import { appActions } from "app/app-reducer";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -18,7 +18,7 @@ export const ErrorSnackbars = () => {
       return;
     }
 
-    dispatch(appSetErrorAC(null)); //зануляем ошибку в appReducer
+    dispatch(appActions.appSetError(null)); //зануляем ошибку в appReducer
   };
 
   return (
