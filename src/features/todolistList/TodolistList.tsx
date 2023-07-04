@@ -8,11 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatchType, AppRootStateType, useAppSelector } from "app/store";
 import { TasksStateType } from "app/AppWithRedux";
 import { Navigate } from "react-router-dom";
+import { appSelector } from "app/appSelector";
 
 export const TodolistList = () => {
-  const todolists = useSelector<AppRootStateType, Array<TodolistType>>((state) => state.todos);
-  const tasks = useAppSelector<TasksStateType>((state) => state.tasks);
-  const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn); //протипизированный хук
+  const todos = useAppSelector(appSelector.todosSelector);
+  const tasks = useAppSelector(appSelector.tasksSelector);
+  const isLoggedIn = useAppSelector(appSelector.isLoggedInSelector); //протипизированный хук useAppSelector
   const dispatch = useDispatch<AppDispatchType>();
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export const TodolistList = () => {
         <AddItemForm addItem={addTodolist} />
       </Grid>
       <Grid container spacing={3}>
-        {todolists.map((tl) => {
+        {todos.map((tl) => {
           return (
             <Grid item key={tl.id}>
               <Paper style={{ padding: "10px" }}>

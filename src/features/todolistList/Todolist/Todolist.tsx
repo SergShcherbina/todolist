@@ -24,10 +24,6 @@ type PropsType = {
 export const Todolist = memo((props: PropsType) => {
   const dispatch = useDispatch<AppDispatchType>(); //без типизации <AppDispatchType> будет ругаться при диспатче thunk
 
-  useEffect(() => {
-    dispatch(fetchTasksTC(props.todolistId));
-  }, [props.todolistId]);
-
   const removeTask = useCallback(
     (id: string) => {
       dispatch(removeTaskTC(props.todolistId, id));

@@ -5,6 +5,8 @@ import { handleServerAppError, handleServerNetworkError } from "utils/error.util
 import { AxiosError } from "axios";
 import { FilterValuesType } from "./Todolist/Todolist";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchTasksTC } from "features/todolistList/tasks-reducer";
+import { AppDispatchType } from "app/store";
 
 export type RemoveTodolistActionType = {
   type: "REMOVE-TODOLIST";
@@ -25,7 +27,6 @@ export type ChangeTodolistFilterActionType = {
   filter: FilterValuesType;
 };
 export type SetTodolistsAT = ReturnType<typeof todosActions.setTodolistAC>;
-// export type EntityStatusAT = ReturnType<typeof entityStatusAC>;
 export type TodolistType = {
   id: string;
   title: string;
@@ -139,13 +140,19 @@ export const todosReducer = slice.reducer;
 export const todosActions = slice.actions;
 
 export const setTodolistTC = () => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: AppDispatchType) => {
     dispatch(appActions.appSetLoadingStatus("loading"));
     todolistAPI
       .getTodolists()
       .then((res) => {
         dispatch(todosActions.setTodolistAC({ todos: res.data }));
         dispatch(appActions.appSetLoadingStatus("succeeded"));
+        return res.data; //возвращаем данные, чтобы передать в следующий then
+      })
+      .then((todos) => {
+        todos.forEach((t) => {
+          dispatch(fetchTasksTC(t.id)); //только после загрузки todos начинаем загрузку tasks благодаря promise
+        });
       })
       .catch((err) => {
         handleServerNetworkError(err, dispatch);

@@ -3,6 +3,8 @@ import { appActions } from "app/app-reducer";
 import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
 import { AppDispatchType } from "app/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { todosActions } from "features/todolistList/todolists-reducer";
+import { taskActions } from "features/todolistList/tasks-reducer";
 
 const initialState = {
   isLoggedIn: false,
@@ -71,6 +73,8 @@ export const logOutTC = () => {
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
           dispatch(authActions.login(false)); //вылогиниваемся
+          dispatch(todosActions.setTodolistAC({ todos: [] })); //зачищаем массив todos
+          dispatch(taskActions.clearTask({})); //зачищаем объект тасок
           dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {
           handleServerAppError(res, dispatch);

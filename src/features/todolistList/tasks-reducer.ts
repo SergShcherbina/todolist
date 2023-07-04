@@ -46,6 +46,9 @@ const slice = createSlice({
         task.id === action.payload.taskId ? { ...task, ...action.payload.model } : task
       );
     },
+    clearTask: (state, action) => {
+      return {};
+    },
     entityTaskStatus: (
       state,
       action: PayloadAction<{ todolistId: string; taskId: string; entityTaskStatus: boolean }>
@@ -55,7 +58,7 @@ const slice = createSlice({
       );
     },
   },
-  //если нужно истользовать reducer из др slice, помещаем его в extraReducers
+  //если нужно истользовать action из др slice, помещаем его в extraReducers
   extraReducers: (builder) => {
     builder.addCase(todosActions.removeTodolistAC, (state, action) => {
       state[action.payload.todoId] = []; //при удалении todolist зачищаем массив тасок

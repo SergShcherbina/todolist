@@ -17,17 +17,17 @@ import { TodolistList } from "features/todolistList/TodolistList";
 import { Login } from "features/login/Login";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { initializeAppTC, logOutTC } from "features/login/authReducer";
-import { RequestStatusType } from "./app-reducer";
 import { CircularProgress } from "@mui/material";
+import { appSelector } from "app/appSelector";
 
 export type TasksStateType = {
   [key: string]: Array<TaskType>;
 };
 
 function AppWithRedux() {
-  const status = useAppSelector<RequestStatusType>((state) => state.app.status);
-  const isInitialized = useAppSelector<boolean>((state) => state.app.initialize);
-  const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn);
+  const status = useAppSelector(appSelector.statusSelector);
+  const isInitialized = useAppSelector(appSelector.isInitializedSelector);
+  const isLoggedIn = useAppSelector(appSelector.isLoggedInSelector);
   const dispatch = useDispatch<AppDispatchType>(); //типизируем для thunk
 
   useEffect(() => {

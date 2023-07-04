@@ -13,6 +13,7 @@ import { loginTC } from "./authReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "hooks/useAppDispatch";
+import { appSelector } from "app/appSelector";
 
 type FormikErrorType = {
   email?: string;
@@ -21,8 +22,8 @@ type FormikErrorType = {
 };
 
 export const Login = () => {
-  const statusLoading = useAppSelector((state) => state.app.status);
-  const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn);
+  const statusLoading = useAppSelector(appSelector.statusSelector);
+  const isLoggedIn = useAppSelector<boolean>(appSelector.isLoggedInSelector);
   const dispatch = useAppDispatch(); //протипизированный dispatchs
 
   const formik = useFormik({
