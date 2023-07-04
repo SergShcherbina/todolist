@@ -4,7 +4,7 @@ import { appActions, RequestStatusType } from "app/app-reducer";
 import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
 import { AxiosError } from "axios";
 import { FilterValuesType } from "./Todolist/Todolist";
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type RemoveTodolistActionType = {
   type: "REMOVE-TODOLIST";
