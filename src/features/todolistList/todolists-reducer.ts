@@ -1,10 +1,9 @@
 import { ResultCode, todolistAPI, TodolistApiType } from "api/todolist-api";
-import { Dispatch } from "redux";
 import { appActions, RequestStatusType } from "app/app-reducer";
 import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
 import { FilterValuesType } from "./Todolist/Todolist";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchTasksTC } from "features/todolistList/tasks-reducer";
+import { taskThunk } from "features/todolistList/tasks-reducer";
 import { createAppAsyncThunk } from "utils/createAppAsynkThunk";
 
 export type TodolistType = {
@@ -51,7 +50,7 @@ const slice = createSlice({
 
 //thunk RTK используя createAsyncThunk
 //АРГУМЕНТЫ: 1 - prefix (имя slice и название санки в виде строки), //2 - callback (условно наша старая санка)
-const setTodosTC = createAppAsyncThunk("todolist/setTodolist", async (arg, thunkAPI) => {
+const setTodosTC = createAppAsyncThunk("todolist/setTodolistTC", async (arg, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
   dispatch(appActions.appSetLoadingStatus("loading"));
 
@@ -60,7 +59,7 @@ const setTodosTC = createAppAsyncThunk("todolist/setTodolist", async (arg, thunk
     const todos = res.data;
     dispatch(appActions.appSetLoadingStatus("succeeded"));
     todos.forEach((t) => {
-      dispatch(fetchTasksTC(t.id));
+      dispatch(taskThunk.fetchTasksTC(t.id));
     });
     return todos;
   } catch (err: any) {
@@ -71,7 +70,7 @@ const setTodosTC = createAppAsyncThunk("todolist/setTodolist", async (arg, thunk
 
 //ТИПИЗАЦИЯ: 1что возвращает thunk, 2что приходит в thunk, 3возвращаемая ошибка в rejectWithValue
 //так как обернули в createAppAsyncThunk третий параметр типизируется по умолчанию
-const addTodoTC = createAppAsyncThunk<{ todo: TodolistApiType }, string>("todos/addTodos", async (arg, thunkApi) => {
+const addTodoTC = createAppAsyncThunk<{ todo: TodolistApiType }, string>("todos/addTodosTC", async (arg, thunkApi) => {
   const { dispatch, rejectWithValue } = thunkApi; //thunkAPI обязательный арг из RTK
   dispatch(appActions.appSetLoadingStatus("loading"));
   try {
@@ -128,7 +127,7 @@ const removeTodoTC = createAppAsyncThunk<{ todoId: string }, string>(
 export const changeTodoTitleTC = createAppAsyncThunk<
   { todoId: string; title: string },
   { todoId: string; title: string }
->("todos/updateTodoTc", async (arg, thunkApi) => {
+>("todos/updateTodoTC", async (arg, thunkApi) => {
   const { dispatch, rejectWithValue } = thunkApi;
   dispatch(appActions.appSetLoadingStatus("loading"));
 

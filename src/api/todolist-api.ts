@@ -32,11 +32,11 @@ export const todolistAPI = {
 };
 
 export const taskApi = {
-  getTasks(todolistId: string) {
-    return instance.get<GetTasksResponse>(`/todo-lists/${todolistId}/tasks`);
+  getTasks(todoId: string) {
+    return instance.get<GetTasksResponse>(`/todo-lists/${todoId}/tasks`);
   },
-  addTask(todolistId: string, title: string) {
-    return instance.post<ResponseType<{ item: TaskType }>>(`/todo-lists/${todolistId}/tasks`, { title });
+  addTask(todoId: string, title: string) {
+    return instance.post<ResponseType<{ item: TaskType }>>(`/todo-lists/${todoId}/tasks`, { title });
   },
   delTask(todolistId: string, taskId: string) {
     return instance.delete<ResponseType<{}>>(`/todo-lists/${todolistId}/tasks/${taskId}`);

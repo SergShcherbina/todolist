@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { TaskRedux } from "./Task/Task";
 import { FilterButton } from "./Task/FilterButton";
-import { addTaskTC, changeTaskTC, removeTaskTC } from "../tasks-reducer";
+import { changeTaskTC, FlexType, taskThunk } from "../tasks-reducer";
 import { useDispatch } from "react-redux";
 import { AppDispatchType } from "app/store";
 import { TaskStatuses, TaskType } from "api/todolist-api";
@@ -26,14 +26,14 @@ export const Todolist = memo((props: PropsType) => {
 
   const removeTask = useCallback(
     (id: string) => {
-      dispatch(removeTaskTC(props.todolistId, id));
+      dispatch(taskThunk.removeTaskTC({ todoId: props.todolistId, taskId: id }));
     },
     [dispatch]
   );
 
   const addTask = useCallback(
     (title: string) => {
-      dispatch(addTaskTC(props.todolistId, title));
+      dispatch(taskThunk.addTaskTC({ todoId: props.todolistId, title }));
     },
     [dispatch]
   );
@@ -41,14 +41,14 @@ export const Todolist = memo((props: PropsType) => {
   const changeTaskStatus = useCallback(
     (taskId: string, isDone: boolean) => {
       const status: TaskStatuses = isDone ? TaskStatuses.Completed : TaskStatuses.New;
-      dispatch(changeTaskTC(taskId, props.todolistId, { status }));
+      dispatch(taskThunk.changeTaskTC({ taskId, todoId: props.todolistId, domainModal: { status } }));
     },
     [dispatch]
   );
 
   const changeTaskTitle = useCallback(
-    (taskId: string, newTitle: string) => {
-      dispatch(changeTaskTC(taskId, props.todolistId, { title: newTitle }));
+    (taskId: string, title: string) => {
+      dispatch(taskThunk.changeTaskTC({ taskId, todoId: props.todolistId, domainModal: { title } }));
     },
     [dispatch]
   );
