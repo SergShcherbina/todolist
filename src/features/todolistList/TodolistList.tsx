@@ -3,10 +3,9 @@ import { AddItemForm } from "Components/AddItemForm/AddItemForm";
 import Paper from "@mui/material/Paper";
 import { Todolist } from "./Todolist/Todolist";
 import React, { useCallback, useEffect } from "react";
-import { addTodolistTC, setTodolistTC, TodolistType } from "./todolists-reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatchType, AppRootStateType, useAppSelector } from "app/store";
-import { TasksStateType } from "app/AppWithRedux";
+import { todosThunk } from "./todolists-reducer";
+import { useDispatch } from "react-redux";
+import { AppDispatchType, useAppSelector } from "app/store";
 import { Navigate } from "react-router-dom";
 import { appSelector } from "app/appSelector";
 
@@ -17,12 +16,12 @@ export const TodolistList = () => {
   const dispatch = useDispatch<AppDispatchType>();
 
   useEffect(() => {
-    dispatch(setTodolistTC());
+    dispatch(todosThunk.setTodosTC());
   }, []);
 
   const addTodolist = useCallback(
     (title: string) => {
-      dispatch(addTodolistTC(title));
+      dispatch(todosThunk.addTodoTC(title));
     },
     [dispatch]
   );

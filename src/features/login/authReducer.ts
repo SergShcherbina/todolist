@@ -73,7 +73,7 @@ export const logOutTC = () => {
       .then((res) => {
         if (res.data.resultCode === ResultCode.COMPLETED) {
           dispatch(authActions.login(false)); //вылогиниваемся
-          dispatch(todosActions.setTodolistAC({ todos: [] })); //зачищаем массив todos
+          dispatch(todosActions.clearTodos()); //зачищаем массив todos
           dispatch(taskActions.clearTask({})); //зачищаем объект тасок
           dispatch(appActions.appSetLoadingStatus("succeeded"));
         } else {

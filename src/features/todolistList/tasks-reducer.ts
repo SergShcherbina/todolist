@@ -5,25 +5,25 @@ import { TasksStateType } from "app/AppWithRedux";
 import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
 import { appActions } from "app/app-reducer";
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
-import { todosActions } from "features/todolistList/todolists-reducer";
+import { todosActions, todosThunk } from "features/todolistList/todolists-reducer";
 
 const initialState: TasksStateType = {
   /*"todolistId1": [
-           { id: "1", title: "CSS", status: TaskStatuses.New, todoListId: "todolistId1", description: '',
-               startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
-           { id: "2", title: "JS", status: TaskStatuses.Completed, todoListId: "todolistId1", description: '',
-               startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
-           { id: "3", title: "React", status: TaskStatuses.New, todoListId: "todolistId1", description: '',
-               startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low }
-       ],
-       "todolistId2": [
-           { id: "1", title: "bread", status: TaskStatuses.New, todoListId: "todolistId2", description: '',
-               startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
-           { id: "2", title: "milk", status: TaskStatuses.Completed, todoListId: "todolistId2", description: '',
-               startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
-           { id: "3", title: "tea", status: TaskStatuses.New, todoListId: "todolistId2", description: '',
-               startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low }
-       ]*/
+             { id: "1", title: "CSS", status: TaskStatuses.New, todoListId: "todolistId1", description: '',
+                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
+             { id: "2", title: "JS", status: TaskStatuses.Completed, todoListId: "todolistId1", description: '',
+                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
+             { id: "3", title: "React", status: TaskStatuses.New, todoListId: "todolistId1", description: '',
+                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low }
+         ],
+         "todolistId2": [
+             { id: "1", title: "bread", status: TaskStatuses.New, todoListId: "todolistId2", description: '',
+                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
+             { id: "2", title: "milk", status: TaskStatuses.Completed, todoListId: "todolistId2", description: '',
+                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low },
+             { id: "3", title: "tea", status: TaskStatuses.New, todoListId: "todolistId2", description: '',
+                 startDate: '', deadline: '', addedDate: '', order: 0, priority: TaskPriorities.Low }
+         ]*/
 };
 
 const slice = createSlice({
@@ -60,9 +60,13 @@ const slice = createSlice({
   },
   //если нужно истользовать action из др slice, помещаем его в extraReducers
   extraReducers: (builder) => {
-    builder.addCase(todosActions.removeTodolistAC, (state, action) => {
-      state[action.payload.todoId] = []; //при удалении todolist зачищаем массив тасок
-    });
+    builder
+      .addCase(todosThunk.removeTodoTC.fulfilled, (state, action) => {
+        state[action.payload.todoId] = []; //при удалении todolist зачищаем массив тасок
+      })
+      .addCase(todosThunk.addTodoTC.fulfilled, (state, action) => {
+        state[action.payload.todo.id] = []; //при добавлении тудулиста добавляем массив пустых тасок
+      });
   },
 });
 

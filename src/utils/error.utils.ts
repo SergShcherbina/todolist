@@ -1,7 +1,7 @@
 import { ResponseType, ResultCode } from "api/todolist-api";
 import { appActions } from "app/app-reducer";
 import { Dispatch } from "redux";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 //джeнериковая функция (динамическая типизация)
 export const handleServerAppError = <T>(res: AxiosResponse<ResponseType<T>>, dispatch: Dispatch) => {
@@ -13,7 +13,8 @@ export const handleServerAppError = <T>(res: AxiosResponse<ResponseType<T>>, dis
   dispatch(appActions.appSetLoadingStatus("failed"));
 };
 
-export const handleServerNetworkError = (err: { message: string }, dispatch: Dispatch) => {
+export const handleServerNetworkError = (e: unknown | Error, dispatch: Dispatch) => {
+  const err = e as Error | AxiosError<{ error: string }>; //типизация ошибки
   dispatch(appActions.appSetError(err.message + " 😠"));
   dispatch(appActions.appSetLoadingStatus("failed"));
 };

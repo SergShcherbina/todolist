@@ -1,16 +1,16 @@
-import React, { memo, useCallback, useEffect } from "react";
+import React, { memo, useCallback } from "react";
 import { AddItemForm } from "Components/AddItemForm/AddItemForm";
 import { EditableSpan } from "Components/EditableSpan/EditableSpan";
 import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { TaskRedux } from "./Task/Task";
 import { FilterButton } from "./Task/FilterButton";
-import { addTaskTC, changeTaskTC, fetchTasksTC, removeTaskTC } from "../tasks-reducer";
+import { addTaskTC, changeTaskTC, removeTaskTC } from "../tasks-reducer";
 import { useDispatch } from "react-redux";
 import { AppDispatchType } from "app/store";
 import { TaskStatuses, TaskType } from "api/todolist-api";
 import { RequestStatusType } from "app/app-reducer";
-import { removeTodolistTC, todosActions, updateTodolistTC } from "../todolists-reducer";
+import { todosActions, todosThunk } from "../todolists-reducer";
 
 export type FilterValuesType = "all" | "active" | "completed";
 type PropsType = {
@@ -54,12 +54,12 @@ export const Todolist = memo((props: PropsType) => {
   );
 
   const removeTodolist = useCallback(() => {
-    dispatch(removeTodolistTC(props.todolistId));
+    dispatch(todosThunk.removeTodoTC(props.todolistId));
   }, [dispatch]);
 
   const changeTodolistTitle = useCallback(
     (title: string) => {
-      dispatch(updateTodolistTC(props.todolistId, title));
+      dispatch(todosThunk.changeTodoTitleTC({ todoId: props.todolistId, title }));
     },
     [dispatch]
   );
