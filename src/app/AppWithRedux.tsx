@@ -16,9 +16,10 @@ import { ErrorSnackbars } from "Components/ErrorSnackbar/ErrorSnackbar";
 import { TodolistList } from "features/todolistList/TodolistList";
 import { Login } from "features/login/Login";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { initializeAppTC, logOutTC } from "features/login/authReducer";
+import { authThunk } from "features/login/authReducer";
 import { CircularProgress } from "@mui/material";
 import { appSelector } from "app/appSelector";
+import { appActions } from "app/app-reducer";
 
 export type TasksStateType = {
   [key: string]: Array<TaskType>;
@@ -31,7 +32,8 @@ function AppWithRedux() {
   const dispatch = useDispatch<AppDispatchType>(); //типизируем для thunk
 
   useEffect(() => {
-    dispatch(initializeAppTC());
+    // dispatch(appActions.appInitialize(true));
+    dispatch(authThunk.initializeAppTC(true));
   }, []);
 
   if (!isInitialized) {
@@ -44,7 +46,7 @@ function AppWithRedux() {
   }
 
   const handlerLogOut = () => {
-    dispatch(logOutTC());
+    dispatch(authThunk.logOutTC(false));
   };
   return (
     <div className="App">

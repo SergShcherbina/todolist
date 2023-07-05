@@ -55,7 +55,7 @@ const setTodosTC = createAppAsyncThunk("todolist/setTodolistTC", async (arg, thu
   dispatch(appActions.appSetLoadingStatus("loading"));
 
   try {
-    const res = await todolistAPI.getTodolists();
+    const res = await todolistAPI.getTodolists().then();
     const todos = res.data;
     dispatch(appActions.appSetLoadingStatus("succeeded"));
     todos.forEach((t) => {
@@ -75,7 +75,6 @@ const addTodoTC = createAppAsyncThunk<{ todo: TodolistApiType }, string>("todos/
   dispatch(appActions.appSetLoadingStatus("loading"));
   try {
     const res = await todolistAPI.createTodolist(arg);
-
     if (res.data.resultCode === ResultCode.COMPLETED) {
       dispatch(appActions.appSetLoadingStatus("succeeded"));
       return { todo: res.data.data.item }; //ОБЯЗАТЕЛЬНО ВОЗВРАЩАЕМ ДАННЫЕ

@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1ec7eb3c-c10b-49bc-948e-6260e57ec81a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/todolist-api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/todolist-api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/AppWithRedux.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/AppWithRedux.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/login/authReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/login/authReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/todolistList/Todolist/Todolist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/Todolist/Todolist.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks-reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/todolistList/todolists-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/todolists-reducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -215,7 +216,7 @@
       <workItem from="1688423299975" duration="1994000" />
       <workItem from="1688470976922" duration="5543000" />
       <workItem from="1688476640902" duration="17166000" />
-      <workItem from="1688507401782" duration="27090000" />
+      <workItem from="1688507401782" duration="41479000" />
     </task>
     <servers />
   </component>

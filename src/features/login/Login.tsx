@@ -9,13 +9,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import { useAppSelector } from "app/store";
-import { loginTC } from "./authReducer";
+import { authThunk } from "./authReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import { appSelector } from "app/appSelector";
 
-type FormikErrorType = {
+export type FormikErrorType = {
   email?: string;
   password?: string;
   rememberMe?: boolean;
@@ -51,7 +51,7 @@ export const Login = () => {
     },
     //метод срабатывает при отправке формы благодаря handleSubmit
     onSubmit: (values) => {
-      dispatch(loginTC(values));
+      dispatch(authThunk.loginTC({ values }));
       formik.resetForm(); //зануляем форму
     },
   });
