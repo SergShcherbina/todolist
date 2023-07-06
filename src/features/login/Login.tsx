@@ -12,8 +12,8 @@ import { useAppSelector } from "app/store";
 import { authThunk } from "./authReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Navigate } from "react-router-dom";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { appSelector } from "app/appSelector";
+import { useAppDispatch } from "common/hooks/useAppDispatch";
+import { selectors } from "common/selectots/common.selector";
 
 export type FormikErrorType = {
   email?: string;
@@ -22,8 +22,8 @@ export type FormikErrorType = {
 };
 
 export const Login = () => {
-  const statusLoading = useAppSelector(appSelector.statusSelector);
-  const isLoggedIn = useAppSelector<boolean>(appSelector.isLoggedInSelector);
+  const statusLoading = useAppSelector(selectors.statusSelector);
+  const isLoggedIn = useAppSelector<boolean>(selectors.isLoggedInSelector);
   const dispatch = useAppDispatch(); //протипизированный dispatchs
 
   const formik = useFormik({

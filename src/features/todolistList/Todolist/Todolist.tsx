@@ -1,16 +1,17 @@
 import React, { memo, useCallback } from "react";
-import { AddItemForm } from "Components/AddItemForm/AddItemForm";
-import { EditableSpan } from "Components/EditableSpan/EditableSpan";
+import { AddItemForm } from "common/Components/AddItemForm/AddItemForm";
+import { EditableSpan } from "common/Components/EditableSpan/EditableSpan";
 import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { TaskRedux } from "./Task/Task";
 import { FilterButton } from "./Task/FilterButton";
-import { taskThunk } from "../tasks-reducer";
+import { taskThunk } from "features/todolistList/Todolist/Task/tasks-reducer";
 import { useDispatch } from "react-redux";
 import { AppDispatchType } from "app/store";
-import { TaskStatuses, TaskType } from "api/todolist-api";
 import { RequestStatusType } from "app/app-reducer";
 import { todosActions, todosThunk } from "../todolists-reducer";
+import { TaskType } from "features/todolistList/Todolist/Task/task.api";
+import { TaskStatuses } from "common/enums/common.enums";
 
 export type FilterValuesType = "all" | "active" | "completed";
 type PropsType = {

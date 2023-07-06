@@ -1,7 +1,8 @@
-import { ResponseType, ResultCode } from "api/todolist-api";
 import { appActions } from "app/app-reducer";
 import { Dispatch } from "redux";
 import { AxiosError, AxiosResponse } from "axios";
+import { ResultCode } from "common/enums/common.enums";
+import { ResponseType } from "common/types/common.types";
 
 //джeнериковая функция (динамическая типизация)
 export const handleServerAppError = <T>(res: AxiosResponse<ResponseType<T>>, dispatch: Dispatch) => {

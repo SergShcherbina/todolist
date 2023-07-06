@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import AppWithRedux from "./app/AppWithRedux";
+import App from "app/App";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "app/store";
@@ -13,7 +13,7 @@ root.render(
   <Provider store={store}>
     {/*оборачиваем в BrowserRouter для работы с react-router-dom*/}
     <BrowserRouter>
-      <AppWithRedux />
+      <App />
     </BrowserRouter>
   </Provider>
 );
