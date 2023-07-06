@@ -1,7 +1,7 @@
+//для оптимизации хука useSelector (корректной мемоизации) создаем ф-и селекторы
 import { AppRootStateType } from "app/store";
 
-//для оптимизации хука useSelector (корректной мемоизации) создаем ф-и селекторы
-export const appSelector = {
+export const selectors = {
   todosSelector: (state: AppRootStateType) => state.todos,
   tasksSelector: (state: AppRootStateType) => state.tasks,
   errorSelector: (state: AppRootStateType) => state.app.error,

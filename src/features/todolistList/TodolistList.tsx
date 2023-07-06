@@ -1,23 +1,19 @@
 import Grid from "@mui/material/Grid";
-import { AddItemForm } from "Components/AddItemForm/AddItemForm";
+import { AddItemForm } from "common/Components/AddItemForm/AddItemForm";
 import Paper from "@mui/material/Paper";
 import { Todolist } from "./Todolist/Todolist";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { todosThunk } from "./todolists-reducer";
 import { useDispatch } from "react-redux";
 import { AppDispatchType, useAppSelector } from "app/store";
 import { Navigate } from "react-router-dom";
-import { appSelector } from "app/appSelector";
+import { selectors } from "common/selectots/common.selector";
 
 export const TodolistList = () => {
-  const todos = useAppSelector(appSelector.todosSelector);
-  const tasks = useAppSelector(appSelector.tasksSelector);
-  const isLoggedIn = useAppSelector(appSelector.isLoggedInSelector); //протипизированный хук useAppSelector
+  const todos = useAppSelector(selectors.todosSelector);
+  const tasks = useAppSelector(selectors.tasksSelector);
+  const isLoggedIn = useAppSelector(selectors.isLoggedInSelector); //протипизированный хук useAppSelector
   const dispatch = useDispatch<AppDispatchType>();
-
-  useEffect(() => {
-    dispatch(todosThunk.setTodosTC());
-  }, []);
 
   const addTodolist = useCallback(
     (title: string) => {

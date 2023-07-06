@@ -1,10 +1,11 @@
-import { ResultCode, todolistAPI, TodolistApiType } from "api/todolist-api";
 import { appActions, RequestStatusType } from "app/app-reducer";
-import { handleServerAppError, handleServerNetworkError } from "utils/error.utils";
+import { handleServerAppError, handleServerNetworkError } from "common/utils/error.utils";
 import { FilterValuesType } from "./Todolist/Todolist";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { taskThunk } from "features/todolistList/tasks-reducer";
-import { createAppAsyncThunk } from "utils/createAppAsynkThunk";
+import { taskThunk } from "features/todolistList/Todolist/Task/tasks-reducer";
+import { createAppAsyncThunk } from "common/utils/createAppAsynkThunk";
+import { todolistAPI, TodolistApiType } from "features/todolistList/todolist.api";
+import { ResultCode } from "common/enums/common.enums";
 
 export type TodolistType = {
   id: string;
@@ -53,7 +54,6 @@ const slice = createSlice({
 const setTodosTC = createAppAsyncThunk("todolist/setTodolistTC", async (arg, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
   dispatch(appActions.appSetLoadingStatus("loading"));
-
   try {
     const res = await todolistAPI.getTodolists().then();
     const todos = res.data;
