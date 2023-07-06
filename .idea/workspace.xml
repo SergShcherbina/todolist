@@ -5,21 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae654b37-6033-49fa-8abe-505bf026c4cd" name="setTodosTC" comment="">
+      <change afterPath="$PROJECT_DIR$/src/common/api/common.api.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/common/enums/common.enums.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/common/selectots/common.selector.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/common/types/common.types.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/features/login/auth.api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/todolistList/Todolist/Task/.tasks-reducer.test.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/features/todolistList/Todolist/Task/task.api.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/features/todolistList/todolist.api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/ErrorSnackbar/ErrorSnackbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/Components/ErrorSnackbar/ErrorSnackbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/todolist-api.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/AppWithRedux.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/appSelector.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/appSelector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/selectots/common.selector.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/login/Login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/login/authReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/login/authReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/Todolist/.tasks-reducer.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/api/common.api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/todolistList/Todolist/.tasks-reducer.test.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/todolistList/Todolist/Task/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/Todolist/Task/Task.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/todolistList/Todolist/Todolist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/Todolist/Todolist.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/todolistList/TodolistList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/TodolistList.tsx" afterDir="false" />
@@ -294,7 +293,7 @@
       <updated>1688628015007</updated>
       <workItem from="1688628015129" duration="39000" />
       <workItem from="1688628057416" duration="5462000" />
-      <workItem from="1688674033075" duration="2625000" />
+      <workItem from="1688674033075" duration="3004000" />
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
