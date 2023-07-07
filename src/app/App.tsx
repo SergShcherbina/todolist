@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { AppDispatchType, useAppSelector } from "./store";
-import { TaskType } from "api/todolist-api";
 //импортируем только нужны компоненты, а не всю библиотеку
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -12,29 +11,32 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/icons-material/Menu";
 import LinearProgress from "@mui/material/LinearProgress";
-import { ErrorSnackbars } from "Components/ErrorSnackbar/ErrorSnackbar";
+import { ErrorSnackbars } from "common/Components/ErrorSnackbar/ErrorSnackbar";
 import { TodolistList } from "features/todolistList/TodolistList";
 import { Login } from "features/login/Login";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { authThunk } from "features/login/authReducer";
 import { CircularProgress } from "@mui/material";
-import { appSelector } from "app/appSelector";
-import { appActions } from "app/app-reducer";
+import { TaskType } from "features/todolistList/Todolist/Task/task.api";
+import { selectors } from "common/selectots/common.selector";
 
 export type TasksStateType = {
   [key: string]: Array<TaskType>;
 };
 
-function AppWithRedux() {
-  const status = useAppSelector(appSelector.statusSelector);
-  const isInitialized = useAppSelector(appSelector.isInitializedSelector);
-  const isLoggedIn = useAppSelector(appSelector.isLoggedInSelector);
+function App() {
+  const status = useAppSelector(selectors.statusSelector);
+  const isInitialized = useAppSelector(selectors.isInitializedSelector);
+  const isLoggedIn = useAppSelector(selectors.isLoggedInSelector);
   const dispatch = useDispatch<AppDispatchType>(); //типизируем для thunk
 
   useEffect(() => {
-    // dispatch(appActions.appInitialize(true));
-    dispatch(authThunk.initializeAppTC(true));
+    dispatch(authThunk.isLoggedAppTC()); //проверка авторизации
   }, []);
+
+  const handlerLogOut = () => {
+    dispatch(authThunk.logOutTC(false));
+  };
 
   if (!isInitialized) {
     //спиннер пока не проинициализируется приложение
@@ -44,10 +46,6 @@ function AppWithRedux() {
       </div>
     );
   }
-
-  const handlerLogOut = () => {
-    dispatch(authThunk.logOutTC(false));
-  };
   return (
     <div className="App">
       <AppBar position="static">
@@ -81,4 +79,4 @@ function AppWithRedux() {
   );
 }
 
-export default AppWithRedux;
+export default App;
