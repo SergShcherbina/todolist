@@ -14,6 +14,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "common/hooks/useAppDispatch";
 import { selectors } from "common/selectots/common.selector";
+import { FieldsErrorType, ResponseType } from "common/types/common.types";
 
 export type FormikErrorType = {
   email?: string;
@@ -36,30 +37,34 @@ export const Login = () => {
     // валидация ошибок
     validate: (values) => {
       const errors: FormikErrorType = {}; //все ошибки сохраняем в объект errors
-      if (!values.email) {
-        errors.email = "Required";
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-        errors.email = "Invalid email address";
-      }
-
-      if (!values.password) {
-        errors.password = "Required";
-      } else if (values.password.length < 3) {
-        errors.password = "Too short password";
-      }
-      return errors;
+      // if (!values.email) {
+      //   errors.email = "Required";
+      // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      //   errors.email = "Invalid email address";
+      // }
+      //
+      // if (!values.password) {
+      //   errors.password = "Required";
+      // } else if (values.password.length < 3) {
+      //   errors.password = "Too short password";
+      // }
+      // return errors;
     },
     //метод срабатывает при отправке формы благодаря handleSubmit
-    onSubmit: (values) => {
-      dispatch(authThunk.loginTC({ values }));
-      formik.resetForm(); //зануляем форму
+    onSubmit: (values, formikHelpers) => {
+      dispatch(authThunk.loginTC({ values }))
+        .unwrap()
+        .catch((data: ResponseType) => {
+          data.fieldsErrors?.forEach((err) => {
+            formikHelpers.setFieldError(err.field, err.error);
+          });
+        });
     },
   });
 
   if (isLoggedIn) {
     return <Navigate to={"/"} />; //если isLoggedIn true - направляем на главную
   }
-
   return (
     <Grid container justifyContent={"center"}>
       {statusLoading === "loading" && <LinearProgress color="secondary" />}

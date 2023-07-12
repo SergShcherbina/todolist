@@ -41,8 +41,9 @@ const loginTC = createAppAsyncThunk<boolean, { values: { email: string; password
         dispatch(todosThunk.setTodosTC()); //запрос todos
         return true;
       } else {
-        handleServerAppError(res, dispatch);
-        return rejectWithValue(null);
+        const isShowAppError = !res.data.fieldsErrors.length;
+        handleServerAppError(res, dispatch, isShowAppError);
+        return rejectWithValue(res.data);
       }
     } catch (err) {
       handleServerNetworkError(err, dispatch);
@@ -51,7 +52,7 @@ const loginTC = createAppAsyncThunk<boolean, { values: { email: string; password
   }
 );
 
-export const isLoggedAppTC = createAppAsyncThunk<boolean, void>("auth/initializeAppTC", async (_, thunkAPI) => {
+export const initializeApp = createAppAsyncThunk<boolean, void>("auth/initializeAppTC", async (_, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
   try {
     const res = await authAPI.me();
@@ -91,4 +92,4 @@ export const logOutTC = createAppAsyncThunk<boolean, boolean>("auth/LogOutTC", a
 
 export const authReducer = slice.reducer;
 export const authActions = slice.actions;
-export const authThunk = { loginTC, logOutTC, isLoggedAppTC };
+export const authThunk = { loginTC, logOutTC, isLoggedAppTC: initializeApp };

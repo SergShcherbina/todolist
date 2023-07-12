@@ -4,12 +4,13 @@ import { AxiosError, AxiosResponse } from "axios";
 import { ResultCode } from "common/enums/common.enums";
 import { ResponseType } from "common/types/common.types";
 
-//джeнериковая функция (динамическая типизация)
-export const handleServerAppError = <T>(res: AxiosResponse<ResponseType<T>>, dispatch: Dispatch) => {
-  if (res.data.messages.length >= ResultCode.ERROR) {
-    dispatch(appActions.appSetError(res.data.messages[0] + "😠"));
-  } else {
-    dispatch(appActions.appSetError("error message + 😠"));
+export const handleServerAppError = <T>(
+  res: AxiosResponse<ResponseType<T>>,
+  dispatch: Dispatch,
+  isShowAppError = true
+) => {
+  if (isShowAppError) {
+    dispatch(appActions.appSetError(res.data.messages.length ? res.data.messages[0] : "error message"));
   }
   dispatch(appActions.appSetLoadingStatus("failed"));
 };

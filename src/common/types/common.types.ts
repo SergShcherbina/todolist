@@ -1,7 +1,12 @@
 //необычная типизация похожих типов
 export type ResponseType<D = {}> = {
-  fieldsErrors: Array<string>;
   messages: Array<string>;
   resultCode: number;
+  fieldsErrors: FieldsErrorType[];
   data: D;
+};
+
+export type FieldsErrorType = {
+  field: string;
+  error: string;
 };
