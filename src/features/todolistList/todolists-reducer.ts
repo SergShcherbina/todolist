@@ -1,11 +1,12 @@
 import { appActions, RequestStatusType } from "app/app-reducer";
-import { handleServerAppError, handleServerNetworkError } from "common/utils/error.utils";
+import { handleServerAppError } from "common/utils/error.utils";
 import { FilterValuesType } from "./Todolist/Todolist";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { taskThunk } from "features/todolistList/Todolist/Task/tasks-reducer";
 import { createAppAsyncThunk } from "common/utils/createAppAsynkThunk";
 import { todolistAPI, TodolistApiType } from "features/todolistList/todolist.api";
 import { ResultCode } from "common/enums/common.enums";
+import { thunkTryCatch } from "common/utils/thunkTryCatch";
 
 export type TodolistType = {
   id: string;
@@ -31,7 +32,6 @@ const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    //синтаксис при использовании thunk созданных с помощью createAsyncThunk
     builder
       .addCase(setTodosTC.fulfilled, (state, action) => {
         return action.payload.map((td) => ({ ...td, filter: "all", entityStatus: "idle" }));
@@ -49,88 +49,63 @@ const slice = createSlice({
   },
 });
 
-//thunk RTK используя createAsyncThunk
-//АРГУМЕНТЫ: 1 - prefix (имя slice и название санки в виде строки), //2 - callback (условно наша старая санка)
-const setTodosTC = createAppAsyncThunk("todolist/setTodolistTC", async (arg, thunkAPI) => {
-  const { dispatch, rejectWithValue } = thunkAPI;
-  dispatch(appActions.appSetLoadingStatus("loading"));
-  try {
+const setTodosTC = createAppAsyncThunk<TodolistType[], void>("todolist/setTodolistTC", async (_, thunkAPI) => {
+  const { dispatch } = thunkAPI;
+
+  return thunkTryCatch(thunkAPI, async () => {
     const res = await todolistAPI.getTodolists().then();
     const todos = res.data;
-    dispatch(appActions.appSetLoadingStatus("succeeded"));
     todos.forEach((t) => {
       dispatch(taskThunk.fetchTasksTC(t.id));
     });
     return todos;
-  } catch (err: any) {
-    handleServerNetworkError(err, dispatch);
-    return rejectWithValue(null);
-  }
+  });
 });
 
-//ТИПИЗАЦИЯ: 1что возвращает thunk, 2что приходит в thunk, 3возвращаемая ошибка в rejectWithValue
-//так как обернули в createAppAsyncThunk третий параметр типизируется по умолчанию
-const addTodoTC = createAppAsyncThunk<{ todo: TodolistApiType }, string>("todos/addTodosTC", async (arg, thunkApi) => {
-  const { dispatch, rejectWithValue } = thunkApi; //thunkAPI обязательный арг из RTK
-  dispatch(appActions.appSetLoadingStatus("loading"));
-  try {
+const addTodoTC = createAppAsyncThunk<{ todo: TodolistApiType }, string>("todos/addTodosTC", async (arg, thunkAPI) => {
+  const { dispatch, rejectWithValue } = thunkAPI;
+
+  return thunkTryCatch(thunkAPI, async () => {
     const res = await todolistAPI.createTodolist(arg);
     if (res.data.resultCode === ResultCode.COMPLETED) {
       dispatch(appActions.appSetLoadingStatus("succeeded"));
-      return { todo: res.data.data.item }; //ОБЯЗАТЕЛЬНО ВОЗВРАЩАЕМ ДАННЫЕ
+      return { todo: res.data.data.item };
     } else {
-      handleServerAppError(res, dispatch); //вынесли кусок кода в дженериковую ф-ю
+      handleServerAppError(res, dispatch);
       return rejectWithValue(null);
     }
-  } catch (err) {
-    handleServerNetworkError(err, dispatch); //вынесли кусок кода в ф-ю
-    return rejectWithValue(null); //возвращаем ошибку, упакованную в rejectWithValue
-  } //точнее возвращаем null так как ошибки обрабатываем в ф-и handleServerNetworkError
+  });
 });
 
 const removeTodoTC = createAppAsyncThunk<{ todoId: string }, string>(
   "todos/removeTodos",
   async (todoId: string, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI;
-    dispatch(appActions.appSetLoadingStatus("loading")); //запуск спиннера загрузки
-    dispatch(todosActions.entityStatusAC({ todoId, entityStatus: "loading" })); //диспатчим состояние дизейблим кн удаления
 
-    try {
+    return thunkTryCatch(thunkAPI, async () => {
       const res = await todolistAPI.deleteTodolist(todoId);
       if (res.data.resultCode === ResultCode.COMPLETED) {
-        //если с сервера придет полож код(доки API), enum
         dispatch(appActions.appSetLoadingStatus("succeeded"));
         return { todoId };
       } else {
-        //в противном случае (ошибка):
         if (res.data.messages.length > 0) {
-          //проверяем наличие сообщения ошибки
-          dispatch(appActions.appSetError(res.data.messages[0])); //диспатчим его в компоненту
+          dispatch(appActions.appSetError(res.data.messages[0]));
         } else {
-          dispatch(appActions.appSetError("error + 😠")); //диспатчим свой текст ошибки
+          handleServerAppError(res, dispatch);
+          return rejectWithValue(null);
         }
-        dispatch(appActions.appSetLoadingStatus("failed")); //диспатчим состояние загрузки(убираем спиннер)
-        return rejectWithValue(null);
       }
-    } catch (err: any) {
-      // срабатывает если ошибка с соид-ем инте-та
-      dispatch(appActions.appSetError(err.message + " 😠")); //диспатчим сообщение ошибки
-      dispatch(appActions.appSetLoadingStatus("failed")); //диспатчим состояние загрузки(убираем спиннер)
-      return rejectWithValue(null);
-    } finally {
-      dispatch(todosActions.entityStatusAC({ todoId, entityStatus: "idle" })); //диспатчим состояние раздизейбл кн удаления
-    }
+    });
   }
 );
 
 export const changeTodoTitleTC = createAppAsyncThunk<
   { todoId: string; title: string },
   { todoId: string; title: string }
->("todos/updateTodoTC", async (arg, thunkApi) => {
-  const { dispatch, rejectWithValue } = thunkApi;
-  dispatch(appActions.appSetLoadingStatus("loading"));
+>("todos/updateTodoTC", async (arg, thunkAPI) => {
+  const { dispatch, rejectWithValue } = thunkAPI;
 
-  try {
+  return thunkTryCatch(thunkAPI, async () => {
     const res = await todolistAPI.updateTodolist(arg.todoId, arg.title);
     if (res.data.resultCode === 0) {
       dispatch(appActions.appSetLoadingStatus("succeeded"));
@@ -139,12 +114,9 @@ export const changeTodoTitleTC = createAppAsyncThunk<
       handleServerAppError(res, dispatch);
       return rejectWithValue(null);
     }
-  } catch (err) {
-    handleServerNetworkError(err, dispatch);
-    return rejectWithValue(null);
-  }
+  });
 });
 
 export const todosReducer = slice.reducer;
 export const todosActions = slice.actions;
-export const todosThunk = { setTodosTC, removeTodoTC, addTodoTC: addTodoTC, changeTodoTitleTC };
+export const todosThunk = { setTodosTC, removeTodoTC, addTodoTC, changeTodoTitleTC };

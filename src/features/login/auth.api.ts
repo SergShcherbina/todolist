@@ -4,18 +4,15 @@ import { ResponseType } from "common/types/common.types";
 
 export const authAPI = {
   login(data: LoginParamsType) {
-    //логинимся
     return instance.post<ResponseType<number>, AxiosResponse<ResponseType<number>>, LoginParamsType>(
       "auth/login",
       data
     );
   },
   me() {
-    //проверяем или залогинены
     return instance.get<ResponseType<ResponseMeType>>("auth/me");
   },
   logOut: function () {
-    //вылогиниваемся
     return instance.delete<ResponseType>("/auth/login");
   },
 };

@@ -18,5 +18,4 @@ export const handleServerAppError = <T>(
 export const handleServerNetworkError = (e: unknown | Error, dispatch: Dispatch) => {
   const err = e as Error | AxiosError<{ error: string }>; //типизация ошибки
   dispatch(appActions.appSetError(err.message + " 😠"));
-  dispatch(appActions.appSetLoadingStatus("failed"));
 };

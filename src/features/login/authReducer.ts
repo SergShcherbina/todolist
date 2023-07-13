@@ -1,11 +1,12 @@
 import { appActions } from "app/app-reducer";
-import { handleServerAppError, handleServerNetworkError } from "common/utils/error.utils";
+import { handleServerAppError } from "common/utils/error.utils";
 import { createSlice } from "@reduxjs/toolkit";
 import { todosActions, todosThunk } from "features/todolistList/todolists-reducer";
 import { taskActions } from "features/todolistList/Todolist/Task/tasks-reducer";
 import { createAppAsyncThunk } from "common/utils/createAppAsynkThunk";
 import { authAPI } from "features/login/auth.api";
 import { ResultCode } from "common/enums/common.enums";
+import { thunkTryCatch } from "common/utils/thunkTryCatch";
 
 const initialState = {
   isLoggedIn: false,
@@ -33,63 +34,54 @@ const loginTC = createAppAsyncThunk<boolean, { values: { email: string; password
   "auth/LoginTC",
   async (arg, thunkAPI) => {
     const { dispatch, rejectWithValue } = thunkAPI;
-    try {
-      dispatch(appActions.appSetLoadingStatus("loading"));
+
+    return thunkTryCatch(thunkAPI, async () => {
       const res = await authAPI.login(arg.values);
       if (res.data.resultCode === ResultCode.COMPLETED) {
-        dispatch(appActions.appSetLoadingStatus("succeeded"));
-        dispatch(todosThunk.setTodosTC()); //запрос todos
+        dispatch(todosThunk.setTodosTC());
         return true;
       } else {
         const isShowAppError = !res.data.fieldsErrors.length;
         handleServerAppError(res, dispatch, isShowAppError);
         return rejectWithValue(res.data);
       }
-    } catch (err) {
-      handleServerNetworkError(err, dispatch);
-      return rejectWithValue(null);
-    }
+    });
   }
 );
 
-export const initializeApp = createAppAsyncThunk<boolean, void>("auth/initializeAppTC", async (_, thunkAPI) => {
+export const isLoggedAppTC = createAppAsyncThunk<boolean, void>("auth/initializeAppTC", async (_, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
-  try {
+
+  return thunkTryCatch(thunkAPI, async () => {
     const res = await authAPI.me();
     if (res.data.resultCode === ResultCode.COMPLETED) {
-      dispatch(todosThunk.setTodosTC()); //запрос todos
-      return true; //подтверждение авторизации
+      dispatch(todosThunk.setTodosTC());
+      return true;
     } else {
       return rejectWithValue(null);
     }
-  } catch (err) {
-    handleServerNetworkError(err, dispatch);
-    return rejectWithValue(null);
-  } finally {
-    dispatch(appActions.appInitialize(true)); //инициализация приложения
-  }
+  }).then((res) => {
+    dispatch(appActions.appInitialize(true));
+    return res;
+  });
 });
 
 export const logOutTC = createAppAsyncThunk<boolean, boolean>("auth/LogOutTC", async (arg, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
-  try {
-    dispatch(appActions.appSetLoadingStatus("loading"));
+
+  return thunkTryCatch(thunkAPI, async () => {
     const res = await authAPI.logOut();
     if (res.data.resultCode === ResultCode.COMPLETED) {
-      dispatch(todosActions.clearTodos()); //зачищаем массив todos
-      dispatch(taskActions.clearTask({})); //зачищаем объект тасок
+      dispatch(todosActions.clearTodos());
+      dispatch(taskActions.clearTask({}));
       dispatch(appActions.appSetLoadingStatus("succeeded"));
       return arg;
     } else {
       handleServerAppError(res, dispatch);
       return rejectWithValue(null);
     }
-  } catch (err) {
-    handleServerNetworkError(err, dispatch);
-    return rejectWithValue(null);
-  }
+  });
 });
 
 export const authReducer = slice.reducer;
-export const authActions = slice.actions;
-export const authThunk = { loginTC, logOutTC, isLoggedAppTC: initializeApp };
+export const authThunk = { loginTC, logOutTC, isLoggedAppTC };

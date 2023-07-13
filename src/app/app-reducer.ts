@@ -8,14 +8,12 @@ const initialState = {
   initialize: false,
 };
 
-// slice - редьюсеры создаем с помощью функции createSlice
 const slice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    // Объект payload. Типизация через PayloadAction
     appSetLoadingStatus: (state, action: PayloadAction<RequestStatusType>) => {
-      state.status = action.payload; // логику в подредьюсерах пишем мутабельным образом,
+      state.status = action.payload;
     },
     appSetError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
@@ -26,5 +24,5 @@ const slice = createSlice({
   },
 });
 
-export const appReducer = slice.reducer; // Создаем reducer с помощью slice
-export const appActions = slice.actions; // Action creator также достаем с помощью slice
+export const appReducer = slice.reducer;
+export const appActions = slice.actions;
