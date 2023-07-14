@@ -16,9 +16,8 @@ export type TaskPropsType = {
   entityTaskStatus?: boolean;
 };
 
-export const TaskRedux = memo((props: TaskPropsType) => {
+export const Task = memo((props: TaskPropsType) => {
   const dispatch = useDispatch<AppDispatchType>();
-  // const isDisabled = useSelector<AppRootStateType, boolean>(state => state.app.isDisabled)
 
   const onClickHandlerRemove = useCallback(() => {
     props.removeTask(props.task.id);

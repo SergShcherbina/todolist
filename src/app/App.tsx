@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { useDispatch } from "react-redux";
-import { AppDispatchType, useAppSelector } from "./store";
 //импортируем только нужны компоненты, а не всю библиотеку
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -19,6 +17,8 @@ import { authThunk } from "features/login/authReducer";
 import { CircularProgress } from "@mui/material";
 import { TaskType } from "features/todolistList/Todolist/Task/task.api";
 import { selectors } from "common/selectots/common.selector";
+import { useActions } from "common/hooks/useActions";
+import { useAppSelector } from "common/hooks/useAppSelector";
 
 export type TasksStateType = {
   [key: string]: Array<TaskType>;
@@ -28,18 +28,17 @@ function App() {
   const status = useAppSelector(selectors.statusSelector);
   const isInitialized = useAppSelector(selectors.isInitializedSelector);
   const isLoggedIn = useAppSelector(selectors.isLoggedInSelector);
-  const dispatch = useDispatch<AppDispatchType>(); //типизируем для thunk
+  const { isLoggedAppTC, logOutTC } = useActions(authThunk);
 
   useEffect(() => {
-    dispatch(authThunk.isLoggedAppTC()); //проверка авторизации
+    isLoggedAppTC();
   }, []);
 
   const handlerLogOut = () => {
-    dispatch(authThunk.logOutTC(false));
+    logOutTC(false);
   };
 
   if (!isInitialized) {
-    //спиннер пока не проинициализируется приложение
     return (
       <div style={{ position: "fixed", top: "30%", textAlign: "center", width: "100%" }}>
         <CircularProgress />
@@ -60,7 +59,7 @@ function App() {
             </Button>
           )}
         </Toolbar>
-        {/*добавляем линию прогресса из @mui материалUI, добавляем условный рендериг */}
+        {/*добавляем линию прогресса из @mui материалUI */}
         {status === "loading" && <LinearProgress color="secondary" />}
       </AppBar>
       <Container fixed>

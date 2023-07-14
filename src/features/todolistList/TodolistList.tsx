@@ -4,23 +4,20 @@ import Paper from "@mui/material/Paper";
 import { Todolist } from "./Todolist/Todolist";
 import React, { useCallback } from "react";
 import { todosThunk } from "./todolists-reducer";
-import { useDispatch } from "react-redux";
-import { AppDispatchType, useAppSelector } from "app/store";
 import { Navigate } from "react-router-dom";
 import { selectors } from "common/selectots/common.selector";
+import { useActions } from "common/hooks/useActions";
+import { useAppSelector } from "common/hooks/useAppSelector";
 
 export const TodolistList = () => {
   const todos = useAppSelector(selectors.todosSelector);
   const tasks = useAppSelector(selectors.tasksSelector);
   const isLoggedIn = useAppSelector(selectors.isLoggedInSelector); //протипизированный хук useAppSelector
-  const dispatch = useDispatch<AppDispatchType>();
+  const { addTodoTC } = useActions(todosThunk);
 
-  const addTodolist = useCallback(
-    (title: string) => {
-      dispatch(todosThunk.addTodoTC(title));
-    },
-    [dispatch]
-  );
+  const addTodolist = useCallback((title: string) => {
+    addTodoTC(title);
+  }, []);
 
   if (!isLoggedIn) {
     return <Navigate to={"/login"} />; //если isLoggedIn false - перенаправляем на /login

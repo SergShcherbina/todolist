@@ -8,13 +8,13 @@ import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
-import { useAppSelector } from "app/store";
 import { authThunk } from "./authReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "common/hooks/useAppDispatch";
 import { selectors } from "common/selectots/common.selector";
-import { FieldsErrorType, ResponseType } from "common/types/common.types";
+import { ResponseType } from "common/types/common.types";
+import { useAppSelector } from "common/hooks/useAppSelector";
 
 export type FormikErrorType = {
   email?: string;
@@ -25,16 +25,14 @@ export type FormikErrorType = {
 export const Login = () => {
   const statusLoading = useAppSelector(selectors.statusSelector);
   const isLoggedIn = useAppSelector<boolean>(selectors.isLoggedInSelector);
-  const dispatch = useAppDispatch(); //протипизированный dispatchs
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
-      //name input/Field с начальными значениями
       email: "",
       password: "",
       rememberMe: false,
     },
-    // валидация ошибок
     validate: (values) => {
       const errors: FormikErrorType = {}; //все ошибки сохраняем в объект errors
       // if (!values.email) {
@@ -50,7 +48,6 @@ export const Login = () => {
       // }
       // return errors;
     },
-    //метод срабатывает при отправке формы благодаря handleSubmit
     onSubmit: (values, formikHelpers) => {
       dispatch(authThunk.loginTC({ values }))
         .unwrap()
