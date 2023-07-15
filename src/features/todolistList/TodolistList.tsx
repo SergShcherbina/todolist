@@ -1,22 +1,21 @@
 import Grid from "@mui/material/Grid";
-import { AddItemForm } from "common/Components/AddItemForm/AddItemForm";
+import { AddItemForm } from "common/components/AddItemForm/AddItemForm";
 import Paper from "@mui/material/Paper";
-import { Todolist } from "./Todolist/Todolist";
 import React, { useCallback } from "react";
-import { todosThunk } from "./todolists-reducer";
+import { todosThunk } from "features/todolistList/todolist/model/todolists-reducer";
 import { Navigate } from "react-router-dom";
-import { selectors } from "common/selectots/common.selector";
+import { selectors } from "common/selectots/common-selector";
 import { useActions } from "common/hooks/useActions";
 import { useAppSelector } from "common/hooks/useAppSelector";
+import { Todolist } from "features/todolistList/todolist/ui/Todolist";
 
 export const TodolistList = () => {
-  const todos = useAppSelector(selectors.todosSelector);
-  const tasks = useAppSelector(selectors.tasksSelector);
-  const isLoggedIn = useAppSelector(selectors.isLoggedInSelector); //протипизированный хук useAppSelector
+  const todolists = useAppSelector(selectors.todosSelector);
+  const isLoggedIn = useAppSelector(selectors.isLoggedInSelector);
   const { addTodoTC } = useActions(todosThunk);
 
   const addTodolist = useCallback((title: string) => {
-    addTodoTC(title);
+    return addTodoTC(title).unwrap();
   }, []);
 
   if (!isLoggedIn) {
@@ -29,17 +28,11 @@ export const TodolistList = () => {
         <AddItemForm addItem={addTodolist} />
       </Grid>
       <Grid container spacing={3}>
-        {todos.map((tl) => {
+        {todolists.map((tl) => {
           return (
             <Grid item key={tl.id}>
               <Paper style={{ padding: "10px" }}>
-                <Todolist
-                  todolistId={tl.id}
-                  title={tl.title}
-                  filter={tl.filter}
-                  entityStatus={tl.entityStatus}
-                  tasks={tasks[tl.id]}
-                />
+                <Todolist key={tl.id} todo={tl} />
               </Paper>
             </Grid>
           );

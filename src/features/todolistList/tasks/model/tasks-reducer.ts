@@ -1,10 +1,10 @@
-import { TasksStateType } from "app/App";
-import { handleServerAppError } from "common/utils/error.utils";
+import { TasksStateType } from "app/ui/App";
+import { handleServerAppError } from "common/utils/error-utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { todosThunk } from "features/todolistList/todolists-reducer";
+import { todosThunk } from "features/todolistList/todolist/model/todolists-reducer";
 import { createAppAsyncThunk } from "common/utils/createAppAsynkThunk";
-import { taskApi, TaskType, UpdateTaskModelType } from "features/todolistList/Todolist/Task/task.api";
-import { ResultCode, TaskPriorities, TaskStatuses } from "common/enums/common.enums";
+import { taskApi, TaskType, UpdateTaskModelType } from "features/todolistList/tasks/api/task-api";
+import { ResultCode, TaskPriorities, TaskStatuses } from "common/enums/common-enums";
 import { thunkTryCatch } from "common/utils/thunkTryCatch";
 
 const initialState: TasksStateType = {
@@ -107,7 +107,7 @@ const addTaskTC = createAppAsyncThunk<{ todoId: string; task: TaskType }, { todo
         return { todoId, task: res.data.data.item };
       } else {
         handleServerAppError(res, dispatch);
-        return rejectWithValue(null);
+        return rejectWithValue(res.data);
       }
     });
   }
@@ -122,7 +122,7 @@ export const changeTaskTC = createAppAsyncThunk<
   return thunkTryCatch(thankAPI, async () => {
     const task = thankAPI.getState().tasks[arg.todoId].find((t) => t.id === arg.taskId);
     if (!task) {
-      console.warn("Task not found in the state");
+      console.warn("tasks not found in the state");
       return rejectWithValue(null);
     }
     const model: UpdateTaskModelType = {

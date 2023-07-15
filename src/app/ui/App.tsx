@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./App.css";
+import "app/ui/app.css";
 //импортируем только нужны компоненты, а не всю библиотеку
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -9,14 +9,14 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/icons-material/Menu";
 import LinearProgress from "@mui/material/LinearProgress";
-import { ErrorSnackbars } from "common/Components/ErrorSnackbar/ErrorSnackbar";
+import { ErrorSnackbars } from "common/components/ErrorSnackbar/ErrorSnackbar";
 import { TodolistList } from "features/todolistList/TodolistList";
-import { Login } from "features/login/Login";
+import { Login } from "features/login/ui/Login";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { authThunk } from "features/login/authReducer";
+import { authThunk } from "features/login/model/auth-reducer";
 import { CircularProgress } from "@mui/material";
-import { TaskType } from "features/todolistList/Todolist/Task/task.api";
-import { selectors } from "common/selectots/common.selector";
+import { TaskType } from "features/todolistList/tasks/api/task-api";
+import { selectors } from "common/selectots/common-selector";
 import { useActions } from "common/hooks/useActions";
 import { useAppSelector } from "common/hooks/useAppSelector";
 

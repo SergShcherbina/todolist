@@ -2,10 +2,10 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import App from "app/App";
+import App from "app/ui/App";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "app/store";
+import { store } from "app/model/store";
 
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);

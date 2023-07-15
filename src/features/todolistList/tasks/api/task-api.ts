@@ -1,6 +1,6 @@
-import { instance } from "common/api/common.api";
-import { TaskPriorities, TaskStatuses } from "common/enums/common.enums";
-import { ResponseType } from "common/types/common.types";
+import { instance } from "common/api/common-api";
+import { TaskPriorities, TaskStatuses } from "common/enums/common-enums";
+import { ResponseType } from "common/types/common-types";
 
 export const taskApi = {
   getTasks(todoId: string) {

@@ -1,11 +1,11 @@
-import { appActions } from "app/app-reducer";
-import { handleServerAppError } from "common/utils/error.utils";
+import { appActions } from "app/model/app-reducer";
+import { handleServerAppError } from "common/utils/error-utils";
 import { createSlice } from "@reduxjs/toolkit";
-import { todosActions, todosThunk } from "features/todolistList/todolists-reducer";
-import { taskActions } from "features/todolistList/Todolist/Task/tasks-reducer";
+import { todosActions, todosThunk } from "features/todolistList/todolist/model/todolists-reducer";
+import { taskActions } from "features/todolistList/tasks/model/tasks-reducer";
 import { createAppAsyncThunk } from "common/utils/createAppAsynkThunk";
-import { authAPI } from "features/login/auth.api";
-import { ResultCode } from "common/enums/common.enums";
+import { authApi } from "features/login/api/auth-api";
+import { ResultCode } from "common/enums/common-enums";
 import { thunkTryCatch } from "common/utils/thunkTryCatch";
 
 const initialState = {
@@ -36,7 +36,7 @@ const loginTC = createAppAsyncThunk<boolean, { values: { email: string; password
     const { dispatch, rejectWithValue } = thunkAPI;
 
     return thunkTryCatch(thunkAPI, async () => {
-      const res = await authAPI.login(arg.values);
+      const res = await authApi.login(arg.values);
       if (res.data.resultCode === ResultCode.COMPLETED) {
         dispatch(todosThunk.setTodosTC());
         return true;
@@ -53,7 +53,7 @@ export const isLoggedAppTC = createAppAsyncThunk<boolean, void>("auth/initialize
   const { dispatch, rejectWithValue } = thunkAPI;
 
   return thunkTryCatch(thunkAPI, async () => {
-    const res = await authAPI.me();
+    const res = await authApi.me();
     if (res.data.resultCode === ResultCode.COMPLETED) {
       dispatch(todosThunk.setTodosTC());
       return true;
@@ -70,7 +70,7 @@ export const logOutTC = createAppAsyncThunk<boolean, boolean>("auth/LogOutTC", a
   const { dispatch, rejectWithValue } = thunkAPI;
 
   return thunkTryCatch(thunkAPI, async () => {
-    const res = await authAPI.logOut();
+    const res = await authApi.logOut();
     if (res.data.resultCode === ResultCode.COMPLETED) {
       dispatch(todosActions.clearTodos());
       dispatch(taskActions.clearTask({}));

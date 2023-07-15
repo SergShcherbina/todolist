@@ -1,7 +1,7 @@
-import { appActions } from "app/app-reducer";
+import { appActions } from "app/model/app-reducer";
 import { Dispatch } from "redux";
 import { AxiosError, AxiosResponse } from "axios";
-import { ResponseType } from "common/types/common.types";
+import { ResponseType } from "common/types/common-types";
 
 /**
  * Handles server errors and sets the app error and loading status in the Redux store.

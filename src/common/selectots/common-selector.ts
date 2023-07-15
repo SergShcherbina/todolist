@@ -1,5 +1,5 @@
 //для оптимизации хука useSelector (корректной мемоизации) создаем ф-и селекторы
-import { AppRootStateType } from "app/store";
+import { AppRootStateType } from "app/model/store";
 
 export const selectors = {
   todosSelector: (state: AppRootStateType) => state.todos,

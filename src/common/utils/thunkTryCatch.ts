@@ -1,8 +1,8 @@
-import { AppDispatchType, AppRootStateType } from "app/store";
-import { ResponseType } from "common/types/common.types";
+import { AppDispatchType, AppRootStateType } from "app/model/store";
+import { ResponseType } from "common/types/common-types";
 import { BaseThunkAPI } from "@reduxjs/toolkit/dist/createAsyncThunk";
-import { appActions } from "app/app-reducer";
-import { handleServerNetworkError } from "common/utils/error.utils";
+import { appActions } from "app/model/app-reducer";
+import { handleServerNetworkError } from "common/utils/error-utils";
 
 /**
  * Executes a logic function within a try-catch block and handles server/network errors.

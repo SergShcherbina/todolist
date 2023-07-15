@@ -1,14 +1,12 @@
-import { instance } from "common/api/common.api";
+import { instance } from "common/api/common-api";
 import { AxiosResponse } from "axios";
-import { ResponseType } from "common/types/common.types";
+import { ResponseType } from "common/types/common-types";
 
-export const todolistAPI = {
+export const todolistApi = {
   getTodolists() {
-    //методы вызываем у instance и обязательно return данных
     return instance.get<TodolistApiType[]>("todo-lists");
   },
   createTodolist(title: string) {
-    //полезную нагрузку передаем вторым параметром в виде {} св-ва 'title' - имя в зависимости от сервера
     return instance.post<
       ResponseType<{ item: TodolistApiType }>,
       AxiosResponse<ResponseType<{ item: TodolistApiType }>>,

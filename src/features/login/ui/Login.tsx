@@ -8,14 +8,14 @@ import FormLabel from "@mui/material/FormLabel";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
-import { authThunk } from "./authReducer";
+import { authThunk } from "features/login/model/auth-reducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Navigate } from "react-router-dom";
-import { selectors } from "common/selectots/common.selector";
-import { ResponseType } from "common/types/common.types";
+import { selectors } from "common/selectots/common-selector";
+import { ResponseType } from "common/types/common-types";
 import { useAppSelector } from "common/hooks/useAppSelector";
 import { useActions } from "common/hooks/useActions";
-import { LoginParamsType } from "features/login/auth.api";
+import { LoginParamsType } from "features/login/api/auth-api";
 
 export type FormikErrorType = Partial<LoginParamsType>;
 
