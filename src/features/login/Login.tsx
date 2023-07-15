@@ -11,21 +11,18 @@ import { useFormik } from "formik";
 import { authThunk } from "./authReducer";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Navigate } from "react-router-dom";
-import { useAppDispatch } from "common/hooks/useAppDispatch";
 import { selectors } from "common/selectots/common.selector";
 import { ResponseType } from "common/types/common.types";
 import { useAppSelector } from "common/hooks/useAppSelector";
+import { useActions } from "common/hooks/useActions";
+import { LoginParamsType } from "features/login/auth.api";
 
-export type FormikErrorType = {
-  email?: string;
-  password?: string;
-  rememberMe?: boolean;
-};
+export type FormikErrorType = Partial<LoginParamsType>;
 
 export const Login = () => {
   const statusLoading = useAppSelector(selectors.statusSelector);
   const isLoggedIn = useAppSelector<boolean>(selectors.isLoggedInSelector);
-  const dispatch = useAppDispatch();
+  const { loginTC } = useActions(authThunk);
 
   const formik = useFormik({
     initialValues: {
@@ -34,22 +31,22 @@ export const Login = () => {
       rememberMe: false,
     },
     validate: (values) => {
-      const errors: FormikErrorType = {}; //все ошибки сохраняем в объект errors
-      // if (!values.email) {
-      //   errors.email = "Required";
-      // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      //   errors.email = "Invalid email address";
-      // }
-      //
-      // if (!values.password) {
-      //   errors.password = "Required";
-      // } else if (values.password.length < 3) {
-      //   errors.password = "Too short password";
-      // }
-      // return errors;
+      const errors: FormikErrorType = {};
+      if (!values.email) {
+        errors.email = "Required";
+      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+        errors.email = "Invalid email address";
+      }
+
+      if (!values.password) {
+        errors.password = "Required";
+      } else if (values.password.length < 3) {
+        errors.password = "Too short password";
+      }
+      return errors;
     },
     onSubmit: (values, formikHelpers) => {
-      dispatch(authThunk.loginTC({ values }))
+      loginTC({ values })
         .unwrap()
         .catch((data: ResponseType) => {
           data.fieldsErrors?.forEach((err) => {
@@ -60,13 +57,12 @@ export const Login = () => {
   });
 
   if (isLoggedIn) {
-    return <Navigate to={"/"} />; //если isLoggedIn true - направляем на главную
+    return <Navigate to={"/"} />;
   }
   return (
     <Grid container justifyContent={"center"}>
       {statusLoading === "loading" && <LinearProgress color="secondary" />}
       <Grid item justifyContent={"center"}>
-        {/* оборачиваем форму в тэг form и добавляем встроенную ф-ю handleSubmit */}
         <form onSubmit={formik.handleSubmit}>
           <FormControl>
             <FormLabel>
@@ -90,18 +86,11 @@ export const Login = () => {
                 value={formik.values.email}
                 onBlur={formik.handleBlur}
               />
-              {/* если ошибка присутствует и с поля убрали фокус, выводим ее */}
               {formik.errors.email && formik.touched.email ? (
                 <div style={{ color: "red" }}> {formik.errors.email} </div>
               ) : null}
 
-              <TextField
-                type="password"
-                label="Password"
-                margin="normal"
-                // ф-я getFieldProps заменяеи 4 поля, нужно передать содержимое поля name
-                {...formik.getFieldProps("password")}
-              />
+              <TextField type="password" label="Password" margin="normal" {...formik.getFieldProps("password")} />
               {formik.errors.password && formik.touched.password ? (
                 <div style={{ color: "red" }}> {formik.errors.password} </div>
               ) : null}
@@ -109,10 +98,10 @@ export const Login = () => {
               <FormControlLabel
                 label={"Remember me"}
                 control={<Checkbox />}
-                // checked оставляем, так как resetForm не сбрасываем зн checked
                 checked={formik.values.rememberMe}
                 {...formik.getFieldProps("rememberMe")}
               />
+
               <Button type={"submit"} variant={"contained"} color={"primary"}>
                 Login
               </Button>

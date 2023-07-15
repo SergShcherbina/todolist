@@ -1,9 +1,15 @@
 import { appActions } from "app/app-reducer";
 import { Dispatch } from "redux";
 import { AxiosError, AxiosResponse } from "axios";
-import { ResultCode } from "common/enums/common.enums";
 import { ResponseType } from "common/types/common.types";
 
+/**
+ * Handles server errors and sets the app error and loading status in the Redux store.
+ * @template T - The type of the response data.
+ * @param {AxiosResponse<ResponseType<T>>} res - The response object received from the server.
+ * @param {Dispatch} dispatch - The dispatch function from Redux.
+ * @param {boolean} [isShowAppError=true] - Indicates whether to show the app error message. Defaults to true.
+ */
 export const handleServerAppError = <T>(
   res: AxiosResponse<ResponseType<T>>,
   dispatch: Dispatch,
@@ -16,6 +22,6 @@ export const handleServerAppError = <T>(
 };
 
 export const handleServerNetworkError = (e: unknown | Error, dispatch: Dispatch) => {
-  const err = e as Error | AxiosError<{ error: string }>; //типизация ошибки
+  const err = e as Error | AxiosError<{ error: string }>; //error typing
   dispatch(appActions.appSetError(err.message + " 😠"));
 };

@@ -31,7 +31,7 @@ function App() {
   const { isLoggedAppTC, logOutTC } = useActions(authThunk);
 
   useEffect(() => {
-    isLoggedAppTC();
+    isLoggedAppTC({});
   }, []);
 
   const handlerLogOut = () => {
@@ -59,16 +59,13 @@ function App() {
             </Button>
           )}
         </Toolbar>
-        {/*добавляем линию прогресса из @mui материалUI */}
         {status === "loading" && <LinearProgress color="secondary" />}
       </AppBar>
       <Container fixed>
         <Routes>
           <Route path={"/"} element={<TodolistList />} />
           <Route path={"/login"} element={<Login />} />
-          {/*страница с 404 адресом*/}
           <Route path={"/404"} element={<h1>404: PAGE NOTE FOUND</h1>} />
-          {/*при несущ-м url * перенаправлять на 404 стр*/}
           <Route path={"/*"} element={<Navigate to={"/404"} />} />
         </Routes>
       </Container>

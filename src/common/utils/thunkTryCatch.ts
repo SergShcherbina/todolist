@@ -4,6 +4,13 @@ import { BaseThunkAPI } from "@reduxjs/toolkit/dist/createAsyncThunk";
 import { appActions } from "app/app-reducer";
 import { handleServerNetworkError } from "common/utils/error.utils";
 
+/**
+ * Executes a logic function within a try-catch block and handles server/network errors.
+ * @param {BaseThunkAPI<AppRootStateType, any, AppDispatchType, null | ResponseType>} thunkAPI - The thunkAPI object provided by Redux Toolkit.
+ * @param {Function} logic - The logic function to be executed within the try block.
+ * @returns {Promise<any>} - A Promise that resolves with the result of the logic function or rejects with a null value.
+ */
+
 export const thunkTryCatch = async (
   thunkAPI: BaseThunkAPI<AppRootStateType, any, AppDispatchType, null | ResponseType>,
   logic: Function
