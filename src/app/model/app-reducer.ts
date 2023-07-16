@@ -22,6 +22,41 @@ const slice = createSlice({
       state.initialize = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        (action) => {
+          return action.type.endsWith("/pending");
+        },
+        (state, action) => {
+          state.status = "loading";
+        }
+      )
+      .addMatcher(
+        (action) => {
+          return action.type.endsWith("/fulfilled");
+        },
+        (state, action) => {
+          state.status = "succeeded";
+        }
+      )
+      .addMatcher(
+        (action) => {
+          return action.type.endsWith("/rejected");
+        },
+        (state, action) => {
+          state.status = "failed";
+          const { payload, error } = action;
+          if (payload) {
+            if (payload.showGlobalError) {
+              state.error = payload.data.messages.length ? payload.data.messages[0] : "Some error occurred";
+            }
+          } else {
+            state.error = error.message ? error.message : "Some error occurred";
+          }
+        }
+      );
+  },
 });
 
 export const appReducer = slice.reducer;

@@ -17,14 +17,14 @@ export const FilterButtons: FC<Props> = React.memo(({ todo }) => {
     <>
       <Button
         variant={todo.filter === "all" ? "outlined" : "text"}
-        onClick={() => changeFilter(todo.filter)}
+        onClick={() => changeFilter("all")}
         color={"inherit"}
       >
         {"all"}
       </Button>
       <Button
         variant={todo.filter === "active" ? "outlined" : "text"}
-        onClick={() => changeFilter(todo.filter)}
+        onClick={() => changeFilter("active")}
         color={"primary"}
         title={"active"}
       >
@@ -32,7 +32,7 @@ export const FilterButtons: FC<Props> = React.memo(({ todo }) => {
       </Button>
       <Button
         variant={todo.filter === "completed" ? "outlined" : "text"}
-        onClick={() => changeFilter(todo.filter)}
+        onClick={() => changeFilter("completed")}
         color={"secondary"}
       >
         {"completed"}

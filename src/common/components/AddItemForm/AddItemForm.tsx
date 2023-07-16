@@ -24,7 +24,7 @@ export const AddItemForm: FC<Props> = React.memo(({ addItem, isDisabled }) => {
           setTitle("");
         })
         .catch((err) => {
-          setError(err.messages[0]);
+          setError(err.data.messages[0]);
         });
     } else {
       setError("Title is required");

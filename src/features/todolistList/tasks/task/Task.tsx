@@ -17,8 +17,6 @@ export const Task: React.FC<Props> = memo(({ todoId, task }) => {
   const { removeTaskTC, changeTaskTC } = useActions(taskThunk);
 
   const removeTaskHandler = useCallback(() => {
-    debugger;
-    console.log("removeTaskHandler: ");
     removeTaskTC({ todoId, taskId: task.id });
   }, []);
 
