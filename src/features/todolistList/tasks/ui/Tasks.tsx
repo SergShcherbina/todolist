@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Task } from "features/todolistList/tasks/task/Task";
+import { Task } from "features/todolistList/tasks/ui/task/Task";
 import { TaskStatuses } from "common/enums/common-enums";
 import { useAppSelector } from "common/hooks/useAppSelector";
 import { selectors } from "common/selectots/common-selector";

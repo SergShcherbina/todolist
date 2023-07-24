@@ -1,5 +1,5 @@
 import React, { ChangeEvent, memo, useCallback } from "react";
-import s from "features/todolistList/tasks/task/task.module.css";
+import s from "features/todolistList/tasks/ui/task/task.module.css";
 import { Checkbox, IconButton } from "@mui/material";
 import { EditableSpan } from "common/components/EditableSpan/EditableSpan";
 import { Delete } from "@mui/icons-material";
