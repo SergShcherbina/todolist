@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ec7eb3c-c10b-49bc-948e-6260e57ec81a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/ui/header/Header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ui/routing/Routing.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/model/app-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/app-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/ui/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ui/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/AddItemForm/AddItemForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/AddItemForm/AddItemForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utils/createAppAsynkThunk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/createAppAsynkThunk.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utils/error-utils.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utils/thunkTryCatch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/thunkTryCatch.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/login/model/auth-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/login/model/auth-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/model/tasks-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/model/tasks-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/task/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/task/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/FilterButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/FilterButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/todolist/model/todolists-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/todolist/model/todolists-reducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +22,13 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -88,7 +81,6 @@
   <component name="RunManager" selected="Jest.todolist-reducer.test.ts">
     <configuration name="correct todolist should be added" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -101,7 +93,6 @@
     </configuration>
     <configuration name="correct todolist should be remove" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -114,7 +105,6 @@
     </configuration>
     <configuration name="correct todolist should change its name" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -127,7 +117,6 @@
     </configuration>
     <configuration name="todolist-reducer.test.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -149,8 +138,8 @@
       <list>
         <item itemvalue="npm.storybook" />
         <item itemvalue="Jest.todolist-reducer.test.ts" />
-        <item itemvalue="Jest.correct todolist should be remove" />
         <item itemvalue="Jest.correct todolist should change its name" />
+        <item itemvalue="Jest.correct todolist should be remove" />
         <item itemvalue="Jest.correct todolist should be added" />
       </list>
     </recent_temporary>
@@ -259,6 +248,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="newTestCommit" />
+    <MESSAGE value="newTestCommit2" />
+    <MESSAGE value="newTestCommit3" />
+    <option name="LAST_COMMIT_MESSAGE" value="newTestCommit3" />
   </component>
 </project>
