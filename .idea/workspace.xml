@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1ec7eb3c-c10b-49bc-948e-6260e57ec81a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/ui/header/Header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/ui/routing/Routing.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/app-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/app-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/ui/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ui/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/AddItemForm/AddItemForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/AddItemForm/AddItemForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utils/createAppAsynkThunk.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/createAppAsynkThunk.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utils/error-utils.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/utils/thunkTryCatch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/thunkTryCatch.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/login/model/auth-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/login/model/auth-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/model/tasks-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/model/tasks-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/task/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/task/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/FilterButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/FilterButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/todolist/model/todolists-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/todolist/model/todolists-reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/task/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/task/Task.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/task/task.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/task/task.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/Tasks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/Tasks.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +68,11 @@
       <recent name="D:\it-kamasutra\todolist_task-mondayDZ\src\Component" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/features/todolistList/tasks" />
+      <recent name="$PROJECT_DIR$/src/features/todolistList/tasks/ui/task" />
       <recent name="$PROJECT_DIR$/src/features/todolistList/tasks/ui" />
+      <recent name="$PROJECT_DIR$/src/features/todolistList/tasks/ui/filterButton" />
+      <recent name="$PROJECT_DIR$/src/features/todolistList/tasks" />
       <recent name="$PROJECT_DIR$/src/features/todolistList/Task/task" />
-      <recent name="$PROJECT_DIR$/src/app/model" />
-      <recent name="$PROJECT_DIR$/src/app" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.todolist-reducer.test.ts">
@@ -228,7 +218,12 @@
       <workItem from="1689395657677" duration="6702000" />
       <workItem from="1689402771305" duration="28159000" />
       <workItem from="1689534529043" duration="1534000" />
-      <workItem from="1689536362935" duration="671000" />
+      <workItem from="1689536362935" duration="2432000" />
+      <workItem from="1689539613629" duration="483000" />
+      <workItem from="1689547173981" duration="25000" />
+      <workItem from="1689709434709" duration="35000" />
+      <workItem from="1690193191112" duration="1792000" />
+      <workItem from="1690195258496" duration="1475000" />
     </task>
     <servers />
   </component>
@@ -241,6 +236,11 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -253,6 +253,26 @@
                 </map>
               </option>
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/RTK" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
