@@ -24,14 +24,14 @@ export const TodolistList = () => {
 
   return (
     <>
-      <Grid container style={{ padding: "20px" }}>
+      <Grid container style={{ padding: "20px", justifyContent: "center" }}>
         <AddItemForm addItem={addTodolist} />
       </Grid>
-      <Grid container spacing={3}>
+      <Grid container spacing={1} style={{ justifyContent: "center" }}>
         {todolists.map((tl) => {
           return (
-            <Grid item key={tl.id}>
-              <Paper style={{ padding: "10px" }}>
+            <Grid item key={tl.id} sx={{ gap: "15px" }}>
+              <Paper style={{ padding: "10px 10px 20px 20px" }}>
                 <Todolist key={tl.id} todo={tl} />
               </Paper>
             </Grid>

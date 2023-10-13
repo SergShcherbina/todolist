@@ -1,8 +1,5 @@
 import React from "react";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/icons-material/Menu";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
 import AppBar from "@mui/material/AppBar";
@@ -20,14 +17,14 @@ export const Header = () => {
     logOutTC(false);
   };
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ color: "#fff", background: "#8448e8" }}>
       <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu">
-          <Menu />
-        </IconButton>
-        <Typography variant="h6">News</Typography>
+        {/*<IconButton edge="start" color="inherit" aria-label="menu">*/}
+        {/*  <Menu />*/}
+        {/*</IconButton>*/}
+        {/*<Typography variant="h6">News</Typography>*/}
         {isLoggedIn && (
-          <Button color="inherit" onClick={handlerLogOut}>
+          <Button color="inherit" onClick={handlerLogOut} size={"large"}>
             Log out
           </Button>
         )}

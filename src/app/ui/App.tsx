@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "app/ui/app.css";
+import "./app.css";
 //импортируем только нужны компоненты, а не всю библиотеку
 import { ErrorSnackbars } from "common/components/ErrorSnackbar/ErrorSnackbar";
 import { authThunk } from "features/login/model/auth-reducer";

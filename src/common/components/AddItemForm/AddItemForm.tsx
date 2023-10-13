@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField/TextField";
 import React, { ChangeEvent, FC, KeyboardEvent, useState } from "react";
 import { IconButton } from "@mui/material";
-import { AddBox } from "@mui/icons-material";
+import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import { TaskType } from "features/todolistList/tasks/api/task-api";
 import { TodolistApiType } from "features/todolistList/todolist/api/todolist-api";
 import { ResponseType } from "common/types/common-types";
@@ -53,9 +53,13 @@ export const AddItemForm: FC<Props> = React.memo(({ addItem, isDisabled }) => {
         label="Title"
         helperText={error}
         disabled={isDisabled}
+        sx={{
+          background: "rgba(229,229,229,0.35)",
+          boxShadow: "0 0 7px 3px #fff",
+        }}
       />
       <IconButton color="primary" onClick={addItems} disabled={isDisabled}>
-        <AddBox />
+        <AddToPhotosIcon fontSize={"large"} sx={{ color: "#9d67f1" }} />
       </IconButton>
     </div>
   );

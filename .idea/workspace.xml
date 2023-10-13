@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ec7eb3c-c10b-49bc-948e-6260e57ec81a" name="Changes" comment="">
+    <list default="true" id="1ec7eb3c-c10b-49bc-948e-6260e57ec81a" name="Changes" comment="test123">
+      <change afterPath="$PROJECT_DIR$/src/common/img/office.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/task/Task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/task/Task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/task/task.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/task/task.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/Tasks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/tasks/ui/Tasks.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ui/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ui/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ui/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ui/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ui/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ui/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/ui/routing/Routing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ui/routing/Routing.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/components/AddItemForm/AddItemForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/AddItemForm/AddItemForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/todolistList/TodolistList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolistList/TodolistList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +28,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
-        <option value="CSS File" />
         <option value="TypeScript JSX File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -33,6 +42,10 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2L6QwyOWxigT42UI0zEc1MMyAj2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -44,6 +57,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/user/Documents/it-incubator/todolist/src/stories&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -68,17 +82,16 @@
       <recent name="D:\it-kamasutra\todolist_task-mondayDZ\src\Component" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/common/img" />
       <recent name="$PROJECT_DIR$/src/features/todolistList/tasks/ui/task" />
       <recent name="$PROJECT_DIR$/src/features/todolistList/tasks/ui" />
       <recent name="$PROJECT_DIR$/src/features/todolistList/tasks/ui/filterButton" />
       <recent name="$PROJECT_DIR$/src/features/todolistList/tasks" />
-      <recent name="$PROJECT_DIR$/src/features/todolistList/Task/task" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.todolist-reducer.test.ts">
     <configuration name="correct todolist should be added" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -91,7 +104,6 @@
     </configuration>
     <configuration name="correct todolist should be remove" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -104,7 +116,6 @@
     </configuration>
     <configuration name="correct todolist should change its name" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -117,7 +128,6 @@
     </configuration>
     <configuration name="todolist-reducer.test.ts" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
-      <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
@@ -224,6 +234,19 @@
       <workItem from="1689709434709" duration="35000" />
       <workItem from="1690193191112" duration="1792000" />
       <workItem from="1690195258496" duration="1475000" />
+      <workItem from="1692454448736" duration="181000" />
+      <workItem from="1692454647795" duration="94000" />
+      <workItem from="1693736875100" duration="8000" />
+      <workItem from="1696955785207" duration="50000" />
+      <workItem from="1696955919264" duration="627000" />
+      <workItem from="1696956737973" duration="189000" />
+      <workItem from="1696956979399" duration="2259000" />
+      <workItem from="1696959428861" duration="45000" />
+      <workItem from="1696959545982" duration="127000" />
+      <workItem from="1696959724698" duration="855000" />
+      <workItem from="1697120890244" duration="808000" />
+      <workItem from="1697217804432" duration="2051000" />
+      <workItem from="1697224320275" duration="5781000" />
     </task>
     <servers />
   </component>
@@ -231,6 +254,26 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/RTK" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -257,28 +300,19 @@
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/RTK" />
-                </option>
-              </RecentGroup>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="main" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/features/todolistList/todolist/ui/TodolistTitle.tsx</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

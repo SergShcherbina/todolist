@@ -4,6 +4,8 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url("common/img/office.jpg") center / cover no-repeat;
+  backdrop-filter: blur(5px);
 }
 
 code {
