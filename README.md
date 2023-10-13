@@ -1,5 +1,10 @@
-# Getting Started with Create React App
 https://sergshcherbina.github.io/todolist/#/
+### test login and password: 
+login:  `free@samuraijs.com`
+
+passvord: `free`
+
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
