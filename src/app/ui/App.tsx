@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import "app/ui/app.css";
-import "./app.css";
 //импортируем только нужны компоненты, а не всю библиотеку
 import { ErrorSnackbars } from "common/components/ErrorSnackbar/ErrorSnackbar";
 import { authThunk } from "features/login/model/auth-reducer";
@@ -11,6 +9,7 @@ import { useActions } from "common/hooks/useActions";
 import { useAppSelector } from "common/hooks/useAppSelector";
 import { Header } from "app/ui/header/Header";
 import { Routing } from "app/ui/routing/Routing";
+import styled from "styled-components";
 
 export type TasksStateType = {
   [key: string]: Array<TaskType>;
@@ -33,12 +32,19 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <DivApp>
       <Header />
       <Routing />
       <ErrorSnackbars />
-    </div>
+    </DivApp>
   );
 }
 
 export default App;
+
+const DivApp = styled.div`
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-content: center;
+`;

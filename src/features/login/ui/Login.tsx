@@ -16,6 +16,7 @@ import { ResponseType } from "common/types/common-types";
 import { useAppSelector } from "common/hooks/useAppSelector";
 import { useActions } from "common/hooks/useActions";
 import { LoginParamsType } from "features/login/api/auth-api";
+import styled from "styled-components";
 
 export type FormikErrorType = Partial<LoginParamsType>;
 
@@ -62,7 +63,7 @@ export const Login = () => {
   return (
     <Grid container justifyContent={"center"}>
       {statusLoading === "loading" && <LinearProgress color="secondary" />}
-      <Grid item justifyContent={"center"}>
+      <GridStyle item justifyContent={"center"}>
         <form onSubmit={formik.handleSubmit}>
           <FormControl>
             <FormLabel>
@@ -102,13 +103,19 @@ export const Login = () => {
                 {...formik.getFieldProps("rememberMe")}
               />
 
-              <Button type={"submit"} variant={"contained"} color={"primary"}>
+              <Button type={"submit"} variant={"contained"} color={"primary"} size={"large"}>
                 Login
               </Button>
             </FormGroup>
           </FormControl>
         </form>
-      </Grid>
+      </GridStyle>
     </Grid>
   );
 };
+
+const GridStyle = styled(Grid)`
+  background: #f4f4f48f;
+  padding: 20px;
+  margin-top: 10%;
+`;
